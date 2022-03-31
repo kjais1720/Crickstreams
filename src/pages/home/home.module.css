@@ -1,0 +1,19 @@
+
+.hero{
+  position: relative;
+  top: -6rem;
+  min-height: calc(100vh + 6rem);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.hero h1{
+  font-size: 3rem;
+}
+
+.categoriesBox{
+  width: 200px;
+  height: 200px;
+  border-radius: var(--space-sm);
+  background-size: cover;
+}

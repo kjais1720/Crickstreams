@@ -1,8 +1,8 @@
-export function VideoListing(){
-  document.title="Videos | Crickstreams"
-  return(
-    <h1>
-      This is Video listing Page
-    </h1>
-  )
+export function VideoListing() {
+  document.title = "Explore | Crickstreams";
+  return (
+    <main>
+      <h1>This is Video listing Page</h1>
+    </main>
+  );
 }
