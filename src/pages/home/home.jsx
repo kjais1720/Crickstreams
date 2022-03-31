@@ -32,7 +32,7 @@ export function Home() {
         }}
       >
         <div className="hero-content">
-          <h1>Relieve all of most epic cricket memories</h1>
+          <h1>Relive all of most epic cricket memories</h1>
           <p className="txt-lg txt-accent txt-bold">Start Streaming</p>
           <a href="#categories" className="txt-xlg">
             <i className="fad fa-angle-double-down"></i>
