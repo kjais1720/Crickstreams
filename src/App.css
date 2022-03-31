@@ -55,6 +55,8 @@ main{
     display: block;
   }
   header .nav{
+    width: 100%;
+    justify-content: center;
     margin-left: unset;
     display: none;
   }
