@@ -25,7 +25,7 @@ export function SideNav() {
     {
       path: "/watch-later",
       name: "Watch later",
-      icon: "watch",
+      icon: "bookmark",
     },
   ];
   return (
