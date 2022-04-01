@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 export function Header() {
   const [showNav, setShowNav] = useState(false);
   const hamburgerClickHandler = () => setShowNav((prev) => !prev);
+  const getActiveLinkColor = ({isActive}) => isActive ? {color:"var(--tr-accent-color)"} : {color:"var(--tr-white)"};
   return (
     <header className="d-flex pd-x-lg pd-y-sm align-i-center f-wrap">
       <h2 className="logo txt-xlg txt-accent">
-        <Link to="/">Cricstreams</Link>
+        <NavLink to="/">Cricstreams</NavLink>
       </h2>
       <button
         className="hamburger ml-auto tr-btn tr-btn-icon hide"
@@ -16,19 +17,19 @@ export function Header() {
       </button>
       <ul className={`nav ml-auto d-flex align-i-center gap-sm ${showNav && 'active'}`}>
         <li>
-          <Link className="txt-white txt-md txt-semibold" to="/">
+          <NavLink className="txt-white txt-md txt-semibold" style={getActiveLinkColor} to="/">
             Home
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link className="txt-white txt-md txt-semibold" to="/explore">
+          <NavLink className="txt-white txt-md txt-semibold" style={getActiveLinkColor} to="/explore">
             Explore
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link className="txt-white txt-md txt-semibold" to="/auth">
+          <NavLink className="txt-white txt-md txt-semibold" style={getActiveLinkColor} to="/auth">
             Login
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </header>
