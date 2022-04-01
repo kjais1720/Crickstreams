@@ -9,25 +9,25 @@ export const categories = [
   {
     _id: uuid(),
     categoryName: "International",
-    linkPath:"/explore/international",
+    linkPath:"/explore/International",
     categoryBanner:"/assets/category-banner-1.jpg"
   },
   {
     _id: uuid(),
     categoryName: "IPL",
-    linkPath:"/explore/ipl",
+    linkPath:"/explore/IPL",
     categoryBanner:"/assets/category-banner-2.jpg"
   },
   {
     _id: uuid(),
     categoryName: "Vintage",
-    linkPath:"/explore/vintage",
+    linkPath:"/explore/Vintage",
     categoryBanner:"/assets/category-banner-3.webp"
   },
   {
     _id: uuid(),
     categoryName: "All",
-    linkPath:"/explore/all",
+    linkPath:"/explore",
     categoryBanner:"/assets/category-banner-3.webp"
   },
 ];
