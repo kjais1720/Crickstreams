@@ -1,0 +1,75 @@
+.navigation{
+  position: sticky;
+  top: 6rem;
+  width: 75px;
+  background: var(--tr-primary-color);
+  border-right: 5px solid var(--tr-accent-color);
+  overflow-x: hidden;
+  transition: all ease 0.3s;
+}
+
+.navigation ul{
+  width: 100%;
+  padding-left: 5px;
+  padding-top: 40px;
+}
+
+.listItem{
+  /* position: absolute; */
+  width: 100%;
+}
+
+.link{
+  position: relative;
+  width: 100%;
+  display: flex;
+  gap: var(--space-xs);
+  color: var(--tr-white);
+  border-radius: var(--space-lg) 0 0 var(--space-lg);
+}
+
+.active{
+  background-color: var(--tr-accent-color);
+
+}
+
+.link.active::before,
+.link.active::after
+{
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--space-lg));
+  right: 0;
+  height: var(--space-lg);
+  width: var(--space-lg);
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 15px 15px 0 var(--tr-accent-color);
+}
+
+.link.active::after
+{
+  top: unset;
+  bottom: calc(-1 * var(--space-lg));
+  box-shadow: 15px -15px 0 var(--tr-accent-color);
+}
+
+.linkIcon{
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.linkTitle{
+  position: relative;
+}
+
+@media screen and (min-width:42em) {
+  .navigation:hover{
+    width: 300px;
+  }
+}
