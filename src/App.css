@@ -1,8 +1,8 @@
 :root{
   --tr-primary-color: hsl(220, 49%, 15%);
   --tr-primary-darker: hsl(234, 71%, 18%);
-  --tr-primary-lighter: hsl(220, 49%, 30%);
-  --tr-secondary-color: hsl(234, 22%, 44%);
+  --tr-primary-lighter: hsl(220, 49%, 20%);
+  --tr-secondary-color: hsl(220, 49%, 20%);
   --tr-secondary-darker: hsl(234, 22%, 35%);
   --tr-accent-color: hsl(45, 61%, 53%);
   --tr-accent-darker: hsl(45, 61%, 40%);
@@ -26,8 +26,25 @@ body{
   color: var(--tr-white);
 }
 
+/* utilities */
 .ml-auto{
   margin-left: auto;
+}
+
+.align-s-stretch{
+  align-self: stretch;
+}
+
+.justify-i-center{
+  justify-items: center;
+}
+
+.flex-1{
+  flex: 1;
+}
+
+.grid-autofit-md {
+  grid-template-columns: repeat(auto-fit, minmax(15rem,1fr));
 }
 
 header{
@@ -39,6 +56,31 @@ header{
   z-index: 9;
 }
 
+.sidenav-link.active{
+  background-color: var(--tr-accent-color);
+
+}
+
+.sidenav-link.active::before,
+.sidenav-link.active::after
+{
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--space-lg));
+  right: 0;
+  height: var(--space-lg);
+  width: var(--space-lg);
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 15px 15px 0 var(--tr-accent-color);
+}
+
+.sidenav-link.active::after
+{
+  top: unset;
+  bottom: calc(-1 * var(--space-lg));
+  box-shadow: 15px -15px 0 var(--tr-accent-color);
+}
 main{
   min-height: 70vh;
 }
