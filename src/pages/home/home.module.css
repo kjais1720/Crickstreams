@@ -2,6 +2,7 @@
 .hero{
   position: relative;
   top: -6rem;
+  margin-bottom: -6rem;
   min-height: calc(100vh + 6rem);
   background-attachment: fixed;
   background-size: cover;

@@ -1,7 +1,7 @@
 :root{
   --tr-primary-color: hsl(220, 49%, 15%);
   --tr-primary-darker: hsl(234, 71%, 18%);
-  --tr-primary-lighter: hsl(220, 49%, 20%);
+  --tr-primary-lighter: hsl(220, 49%, 16%);
   --tr-secondary-color: hsl(220, 49%, 20%);
   --tr-secondary-darker: hsl(234, 22%, 35%);
   --tr-accent-color: hsl(45, 61%, 53%);
@@ -33,6 +33,10 @@ body{
 
 .flex-1{
   flex: 1;
+}
+
+.no-cursor{
+  cursor: not-allowed;
 }
 
 .grid-autofit-md {

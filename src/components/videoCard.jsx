@@ -23,23 +23,23 @@ export function VideoCard({ video }) {
     },
   ];
   return (
-    <article class="tr-card light-shadow flex-col align-s-stretch pd-xs">
-      <div class="tr-card-banner">
+    <article className="tr-card light-shadow flex-col align-s-stretch pd-xs">
+      <div className="tr-card-banner">
         <img className="w-100" src={imgUrl} alt={title} />
       </div>
-      <div class="tr-card-body flex-col gap-sm justify-c-space-between">
-        <div class="tr-card-header">
-          <h2 class="title p-rel txt-md" data-title={title}>
+      <div className="tr-card-body flex-col gap-sm justify-c-space-between">
+        <div className="tr-card-header">
+          <h2 className="title p-rel txt-md" data-title={title}>
             <Link to={`/video/${id}`}>{truncateText(title, 30)}</Link>
           </h2>
-          <h3 class="subtitle txt-secondary txt-sm">{author}</h3>
+          <h3 className="subtitle txt-secondary txt-sm">{author}</h3>
         </div>
-        <div class="d-flex justify-c-space-between align-i-center gap-sm">
+        <div className="d-flex justify-c-space-between align-i-center gap-sm">
           <button className="tr-btn tr-btn-icon">
-            <i class="far fa-thumbs-up"></i>
+            <i className="far fa-thumbs-up"></i>
           </button>
           <button className="tr-btn tr-btn-icon">
-            <i class="far fa-thumbs-down"></i>
+            <i className="far fa-thumbs-down"></i>
           </button>
           <DropDownMenu menuButtons={dropdownButtons} />
         </div>
