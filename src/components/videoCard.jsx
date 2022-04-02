@@ -29,7 +29,7 @@ export function VideoCard({ video }) {
       </div>
       <div class="tr-card-body flex-col gap-sm justify-c-space-between">
         <div class="tr-card-header">
-          <h2 class="title txt-md">
+          <h2 class="title p-rel txt-md" data-title={title}>
             <Link to={`/video/${id}`}>{truncateText(title, 30)}</Link>
           </h2>
           <h3 class="subtitle txt-secondary txt-sm">{author}</h3>

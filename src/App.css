@@ -31,14 +31,6 @@ body{
   margin-left: auto;
 }
 
-.align-s-stretch{
-  align-self: stretch;
-}
-
-.justify-i-center{
-  justify-items: center;
-}
-
 .flex-1{
   flex: 1;
 }
@@ -72,17 +64,36 @@ header{
   width: var(--space-lg);
   background-color: transparent;
   border-radius: 50%;
-  box-shadow: 15px 15px 0 var(--tr-accent-color);
+  box-shadow: 1rem 1rem 0 var(--tr-accent-color);
 }
 
 .sidenav-link.active::after
 {
   top: unset;
   bottom: calc(-1 * var(--space-lg));
-  box-shadow: 15px -15px 0 var(--tr-accent-color);
+  box-shadow: 1rem -1rem 0 var(--tr-accent-color);
 }
+
 main{
   min-height: 70vh;
+}
+
+/* Video Card  */
+
+/* tooltip for the card title  */
+.tr-card .title:hover::after{
+  content: attr(data-title);
+  font-size: 0.7rem;
+  width: fit-content;
+  left: 0;
+  transform: translateY(100%);
+  top: 0;
+  position: absolute;
+  background: var(--tr-gray);
+  color: var(--tr-primary-color);
+  padding: 0 0.5rem;
+  z-index: 9;
+  border-radius: 0.5rem;
 }
 
 @media screen and (max-width: 45em) {
