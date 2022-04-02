@@ -1,8 +1,8 @@
 :root{
   --tr-primary-color: hsl(220, 49%, 15%);
   --tr-primary-darker: hsl(234, 71%, 18%);
-  --tr-primary-lighter: hsl(220, 49%, 30%);
-  --tr-secondary-color: hsl(234, 22%, 44%);
+  --tr-primary-lighter: hsl(220, 49%, 20%);
+  --tr-secondary-color: hsl(220, 49%, 20%);
   --tr-secondary-darker: hsl(234, 22%, 35%);
   --tr-accent-color: hsl(45, 61%, 53%);
   --tr-accent-darker: hsl(45, 61%, 40%);
@@ -26,8 +26,17 @@ body{
   color: var(--tr-white);
 }
 
+/* utilities */
 .ml-auto{
   margin-left: auto;
+}
+
+.flex-1{
+  flex: 1;
+}
+
+.grid-autofit-md {
+  grid-template-columns: repeat(auto-fit, minmax(15rem,1fr));
 }
 
 header{
@@ -39,8 +48,52 @@ header{
   z-index: 9;
 }
 
+.sidenav-link.active{
+  background-color: var(--tr-accent-color);
+
+}
+
+.sidenav-link.active::before,
+.sidenav-link.active::after
+{
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--space-lg));
+  right: 0;
+  height: var(--space-lg);
+  width: var(--space-lg);
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 1rem 1rem 0 var(--tr-accent-color);
+}
+
+.sidenav-link.active::after
+{
+  top: unset;
+  bottom: calc(-1 * var(--space-lg));
+  box-shadow: 1rem -1rem 0 var(--tr-accent-color);
+}
+
 main{
   min-height: 70vh;
+}
+
+/* Video Card  */
+
+/* tooltip for the card title  */
+.tr-card .title:hover::after{
+  content: attr(data-title);
+  font-size: 0.7rem;
+  width: fit-content;
+  left: 0;
+  transform: translateY(100%);
+  top: 0;
+  position: absolute;
+  background: var(--tr-gray);
+  color: var(--tr-primary-color);
+  padding: 0 0.5rem;
+  z-index: 9;
+  border-radius: 0.5rem;
 }
 
 @media screen and (max-width: 45em) {

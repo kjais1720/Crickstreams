@@ -1,0 +1,34 @@
+.dropdownWrapper{
+  position: relative;
+}
+
+.dropdown{
+  position: absolute;
+  top: 0px;
+  left: -10px;
+  align-items: center;
+  z-index: 100;
+  background-color: var(--tr-background);
+  box-shadow: var(--bs-lighter);
+  border-radius: var(--space-xs);
+  height: 0;
+  overflow: hidden;
+  transition: all ease 0.5s;
+  width: 10rem;
+}
+
+.dropdownWrapper:hover .dropdown{
+  padding: var(--space-xs);
+  height: 6rem;
+}
+
+.dropdown button{
+  color: var(--tr-primary-color);
+  background-color: transparent;
+  font-weight: 500;
+}
+
+.dropdown button:hover,
+.dropdown button:focus{
+  color: var(--tr-accent-color);
+}

@@ -1,11 +1,6 @@
 import styles from "./home.module.css";
 import { Link } from "react-router-dom";
-import { useAxios } from "utilities";
-import { useState } from "react";
-export function Home() {
-  const [apiUrl, setApiUrl] = useState("/api/categories");
-  const { serverResponse, isLoading } = useAxios(apiUrl);
-  const categories = serverResponse.data?.categories || [];
+export function Home({categories}) {
 
   const createCategoryLinks = ({
     categoryName,
