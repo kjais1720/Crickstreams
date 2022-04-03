@@ -41,7 +41,7 @@ export const signupHandler = function (schema, request) {
       watchlater: [],
     };
     const createdUser = schema.users.create(newUser);
-    const encodedToken = sign({ _id, email }, process.env.REACT_APP_JWT_SECRET);
+    const encodedToken = sign({ _id, email ,firstName: rest.firstName}, process.env.REACT_APP_JWT_SECRET);
     return new Response(201, {}, { user :createdUser, encodedToken });
   } catch (error) {
     return new Response(
@@ -73,7 +73,7 @@ export const loginHandler = function (schema, request) {
     }
     if (password === foundUser.password) {
       const encodedToken = sign(
-        { _id: foundUser._id, email },
+        { _id: foundUser._id, email, firstName: foundUser.firstName },
         process.env.REACT_APP_JWT_SECRET
       );
       foundUser.password = undefined;

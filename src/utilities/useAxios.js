@@ -25,16 +25,6 @@ const apiReducer = (state, { type, payload }) => {
  * @returns {isLoading : loading state, serverResponse : response from server, serverError : Error from server}
  */
 export const useAxios = (apiUrl, method = "get", postData, authToken) => {
-  const userToken = localStorage.getItem("userToken");
-  axios.interceptors.request.use(
-    (config) => {
-      config.headers.Authorization = `Bearer ${userToken}`;
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
   const [apiState, apiDispatch] = useReducer(apiReducer, {
     serverResponse: {},
     serverError: {},

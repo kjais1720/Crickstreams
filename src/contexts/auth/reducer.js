@@ -4,11 +4,11 @@
  * @param {object} action : Containing type & payload properties
  * @returns {object} state : modified state
  */
-export const authReducer = (state, { type, payload }) => {
+ export const authReducer = (state, { type, payload }) => {
   console.log({ type, payload });
   switch (type) {
     case "login":
-      return { ...state, isLoggedIn: true, ...payload };
+      return { ...state, isLoggedIn: true, user:{...payload} };
     case "logout":
       localStorage.removeItem("userToken");
       return { ...state, isLoggedIn: false, user: {} };
@@ -16,3 +16,4 @@ export const authReducer = (state, { type, payload }) => {
       return state;
   }
 };
+ 
