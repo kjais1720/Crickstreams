@@ -15,6 +15,6 @@
 .categoriesBox{
   width: 200px;
   height: 200px;
-  border-radius: var(--space-sm);
+  border-radius: var(--radius-xs);
   background-size: cover;
 }

@@ -23,7 +23,7 @@ export function VideoCard({ video }) {
     },
   ];
   return (
-    <article className="tr-card light-shadow flex-col align-s-stretch pd-xs">
+    <article className="tr-card bg-transparent bd-none bs-lighter flex-col align-s-stretch pd-xs">
       <div className="tr-card-banner">
         <img className="w-100" src={imgUrl} alt={title} />
       </div>
@@ -32,7 +32,7 @@ export function VideoCard({ video }) {
           <h2 className="title p-rel txt-md" data-title={title}>
             <Link to={`/video/${id}`}>{truncateText(title, 30)}</Link>
           </h2>
-          <h3 className="subtitle txt-secondary txt-sm">{author}</h3>
+          <h3 className="subtitle txt-sm">{author}</h3>
         </div>
         <div className="d-flex justify-c-space-between align-i-center gap-sm">
           <button className="tr-btn tr-btn-icon">

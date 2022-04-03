@@ -84,6 +84,14 @@ main{
 
 /* Video Card  */
 
+.tr-card .title{
+  color: var(--tr-white);
+}
+
+.tr-card .subtitle{
+  color: var(--tr-gray);
+}
+
 /* tooltip for the card title  */
 .tr-card .title:hover::after{
   content: attr(data-title);
@@ -97,7 +105,7 @@ main{
   color: var(--tr-primary-color);
   padding: 0 0.5rem;
   z-index: 9;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-xs);
 }
 
 @media screen and (max-width: 45em) {

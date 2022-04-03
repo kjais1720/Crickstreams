@@ -35,11 +35,11 @@
 }
 
 .formToggleButtons:nth-child(1){
-  border-radius: var(--space-xs) 0 0 var(--space-xs);
+  border-radius: var(--radius-xs) 0 0 var(--radius-xs);
 }
 
 .formToggleButtons:nth-child(2){
-  border-radius: 0 var(--space-xs) var(--space-xs) 0;
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
 }
 
 .authInputs{
