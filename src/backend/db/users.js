@@ -12,8 +12,12 @@ export const users = [
     firstName: "Adarsh",
     lastName: "Balika",
     email: "adarshbalika@gmail.com",
-    password: "adarshBalika123",
+    password: "adarshBalika@123",
+    likes: [],
+    history: [],
+    playlists: [],
+    watchlater: [],
     createdAt: formatDate(),
     updatedAt: formatDate(),
-  },
+  }
 ];

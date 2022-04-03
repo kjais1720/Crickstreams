@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useAxios } from "utilities";
 import {
   Home,
-  NotFound,
   AppPages
 } from "pages";
 
@@ -13,9 +12,9 @@ export function AllRoutes() {
   const categories = serverResponse.data?.categories || [];
 
   return (
-    <Routes>
-      <Route path="/" element={<Home categories={categories} />} />
-      <Route path="/*" element={<AppPages categories={categories} />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Home categories={categories} />} />
+        <Route path="/*" element={<AppPages categories={categories} />} />
+      </Routes>
   );
 }

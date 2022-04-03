@@ -1,0 +1,51 @@
+.authContainer{
+  background: var(--tr-gray-overlay);
+  backdrop-filter: blur(3px);
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  overflow-y: auto;
+}
+
+.authContainer::-webkit-scrollbar{
+  display: none;
+}
+
+.authFormContainer{
+  width: 90%;
+  height: fit-content;
+  max-width: 25rem;
+  margin: 8rem auto 3rem;
+  background-color: var(--tr-white-overlay);
+  background: var(--tr-white);
+  backdrop-filter: blur(2px);
+}
+
+.authForm{
+  width: 90%;
+  max-width: 20rem;
+}
+
+.formToggleButtons{
+  flex: 1;
+}
+
+.formToggleButtons:nth-child(1){
+  border-radius: var(--radius-xs) 0 0 var(--radius-xs);
+}
+
+.formToggleButtons:nth-child(2){
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+}
+
+.authInputs{
+  padding-right: var(--space-xxlg) ;
+}
+
+.showPasswordBtn{
+  right: var(--space-sm);
+}

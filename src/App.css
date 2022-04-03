@@ -1,7 +1,7 @@
 :root{
   --tr-primary-color: hsl(220, 49%, 15%);
   --tr-primary-darker: hsl(234, 71%, 18%);
-  --tr-primary-lighter: hsl(220, 49%, 20%);
+  --tr-primary-lighter: hsl(220, 49%, 16%);
   --tr-secondary-color: hsl(220, 49%, 20%);
   --tr-secondary-darker: hsl(234, 22%, 35%);
   --tr-accent-color: hsl(45, 61%, 53%);
@@ -33,6 +33,10 @@ body{
 
 .flex-1{
   flex: 1;
+}
+
+.no-cursor{
+  cursor: not-allowed;
 }
 
 .grid-autofit-md {
@@ -80,6 +84,14 @@ main{
 
 /* Video Card  */
 
+.tr-card .title{
+  color: var(--tr-white);
+}
+
+.tr-card .subtitle{
+  color: var(--tr-gray);
+}
+
 /* tooltip for the card title  */
 .tr-card .title:hover::after{
   content: attr(data-title);
@@ -93,7 +105,7 @@ main{
   color: var(--tr-primary-color);
   padding: 0 0.5rem;
   z-index: 9;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-xs);
 }
 
 @media screen and (max-width: 45em) {

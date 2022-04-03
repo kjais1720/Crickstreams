@@ -32,7 +32,7 @@ export function SideNav() {
     <aside className={styles.navigation}>
       <ul>
         {navLinks.map(({ path, name, icon }, idx) => (
-          <li className={styles.listItem}>
+          <li key={idx} className={styles.listItem}>
             <NavLink
               to={path}
               className={`${styles.link} sidenav-link d-flex pd-xs align-i-center`}
