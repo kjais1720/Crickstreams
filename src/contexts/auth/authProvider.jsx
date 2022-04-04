@@ -25,19 +25,6 @@ export function AuthProvider({ children }) {
     }
   },[])
 
-  useEffect(()=>{ //To update the encodedToken in the header everytime user logs in or logs out
-    const userToken = localStorage.getItem("userToken");
-    axios.interceptors.request.use(
-      (config) => {
-        config.headers.authorization = userState.isLoggedIn ? userToken : "" //As a fallback if for some reason the token in localstorage is not removed ;
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
-      }
-    );
-  },[userState.isLoggedIn])
-
   const [showAuthModal, setShowAuthModal] = useState(false);
   return (
     <AuthContext.Provider

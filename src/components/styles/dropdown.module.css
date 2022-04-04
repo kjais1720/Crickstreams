@@ -5,7 +5,7 @@
 .dropdown{
   position: absolute;
   top: 0px;
-  left: -10px;
+  left: 0px;
   align-items: center;
   z-index: 100;
   background-color: var(--tr-background);
@@ -14,7 +14,8 @@
   height: 0;
   overflow: hidden;
   transition: all ease 0.5s;
-  width: 10rem;
+  width: max-content;
+  transform: translateX(-100%);
 }
 
 .dropdownWrapper:hover .dropdown{

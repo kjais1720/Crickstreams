@@ -17,6 +17,5 @@ export function AuthMiddleware() {
       toast.error("You need to login first!");
     }
   }, []);
-  console.log('here')
   return isLoggedIn ? <Outlet /> : "";
 }

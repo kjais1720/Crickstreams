@@ -44,8 +44,7 @@ body{
 }
 
 header{
-  position: sticky;
-  top: 0;
+  position: relative;
   width: 100%;
   backdrop-filter: blur(2px);
   background-image: linear-gradient( var(--tr-primary-overlay) 70%, transparent);
