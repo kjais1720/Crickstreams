@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react";
+import { useAuth } from "contexts"
 import axios from "axios";
 
 const apiReducer = (state, { type, payload }) => {
@@ -24,13 +25,29 @@ const apiReducer = (state, { type, payload }) => {
  * @param {string} authToken The JWT associated with a user
  * @returns {isLoading : loading state, serverResponse : response from server, serverError : Error from server}
  */
-export const useAxios = (apiUrl, method = "get", postData, authToken) => {
+export const useAxios = (apiUrl, method = "get", postData) => {
   const [apiState, apiDispatch] = useReducer(apiReducer, {
     serverResponse: {},
     serverError: {},
     isLoading: false,
   });
+
+  const { userState : {isLoggedIn} } = useAuth();
+  useEffect(()=>{ //To update the encodedToken in the header everytime user logs in or logs out
+    const userToken = localStorage.getItem("userToken");
+    axios.interceptors.request.use(
+      (config) => {
+        config.headers.authorization = userToken //As a fallback if for some reason the token in localstorage is not removed ;
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+  },[isLoggedIn])
+
   const getData = async () => {
+    const userToken = localStorage.getItem("userToken");
     try {
       apiDispatch({ type: "setLoadingTrue" });
       let res;
