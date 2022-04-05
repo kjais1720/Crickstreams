@@ -4,7 +4,7 @@ import { DropDownMenu } from "components";
 import { useUserResources, resourcesApiStateEnums, useAuth } from "contexts";
 import { toast } from "react-toastify";
 
-export function VideoCard({ video }) {
+export function VideoCard({ video, setPlaylistModalState }) {
   const {
     _id: id,
     title,
@@ -33,7 +33,7 @@ export function VideoCard({ video }) {
   const isLiked = likedVideos.some((video) => video._id === id);
   const isAddedToWatchlater = watchlater.some((video) => video._id === id);
 
-  const authMiddleware = (functionToExecute) => {
+  const checkAuth = (functionToExecute) => {
     if (isLoggedIn) {
       functionToExecute();
     } else {
@@ -42,26 +42,44 @@ export function VideoCard({ video }) {
     }
   };
 
-  const addToLikesHandler = () =>
+  const addToLikes = () =>
     isLiked
       ? resourcesApiDispatch({ type: REMOVE_FROM_LIKES, payload: id })
       : resourcesApiDispatch({ type: ADD_TO_LIKES, payload: video });
 
-  const addToWatchlaterHandler = () =>
+  const addToWatchlater = () =>
     isAddedToWatchlater
       ? resourcesApiDispatch({ type: REMOVE_FROM_WATCHLATER, payload: id })
       : resourcesApiDispatch({ type: ADD_TO_WATCHLATER, payload: video });
 
+  const openPlaylistModal = () => {
+    setPlaylistModalState({
+      show: true,
+      selectedVideo: video,
+    });
+  };
+
   const dropdownButtons = [
     {
       name: isAddedToWatchlater ? "Remove from Watch later" : "Add Watch later",
-      clickHandler: () => {authMiddleware(addToWatchlaterHandler)},
+      clickHandler: () => {
+        checkAuth(addToWatchlater);
+      },
       icon: "clock",
     },
     {
       name: "Add to Playlist",
-      clickHandler: () => {}, // To be replaced "Add to playlist" dispatch
+      clickHandler: () => {
+        checkAuth(openPlaylistModal);
+      },
       icon: "list",
+    },
+    {
+      name: isLiked ? "Remove from Likes" : "Add to Likes",
+      clickHandler: () => {
+        checkAuth(addToLikes);
+      },
+      icon: "thumbs-up",
     },
   ];
   return (
@@ -78,24 +96,15 @@ export function VideoCard({ video }) {
           }}
         />
       </div>
-      <div className="tr-card-body flex-col gap-sm justify-c-space-between">
-        <div className="tr-card-header flex-col gap-xs">
-          <h2 className="title p-rel txt-md" data-title={title}>
-            <Link to={`/video/${id}`}>{truncateText(title, 30)}</Link>
-          </h2>
-          <h3 className="subtitle txt-sm">{author}</h3>
-          <h3 className="subtitle txt-sm">{views} views</h3>
-        </div>
+      <div className="tr-card-body flex-col gap-xs justify-c-space-between">
+        <h2 className="title p-rel txt-md" data-title={title}>
+          <Link to={`/video/${id}`}>{truncateText(title, 30)}</Link>
+        </h2>
         <div className="d-flex justify-c-space-between align-i-center gap-sm">
-          <button
-            onClick={() => authMiddleware(addToLikesHandler)}
-            className="tr-btn tr-btn-icon"
-          >
-            <i className={`${isLiked ? "fas" : "far"} fa-thumbs-up`}></i>
-          </button>
-          <button className="tr-btn tr-btn-icon">
-            <i className="far fa-thumbs-down"></i>
-          </button>
+          <div>
+            <h3 className="subtitle txt-sm">{author}</h3>
+            <h3 className="subtitle txt-sm">{views} views</h3>
+          </div>
           <DropDownMenu menuButtons={dropdownButtons} />
         </div>
       </div>

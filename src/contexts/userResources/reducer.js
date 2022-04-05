@@ -62,7 +62,7 @@ export const apiReducer = (state, { type, payload }) => {
         ...state,
         url: `/api/user/playlists/${payload.playlistId}`,
         method: "post",
-        data: { video: payload },
+        data: { video: payload.video },
         toastMessage: "Added to playlist",
         toastType: "success",
       };

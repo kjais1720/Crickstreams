@@ -102,6 +102,7 @@ export function UserResourcesProvider({ children }) {
       resourcesApiDispatch({ type: "CLEAR_TOAST" });
     }
   }, [isLoading, resourcesApiState.toastMessage]);
+  console.log({userResources})
   return (
     <UserResourcesContext.Provider
       value={{ userResources, resourcesApiDispatch }}

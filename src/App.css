@@ -122,6 +122,19 @@ main{
   grid-template-columns: 4fr 2fr;
 }
 
+.tr-modal-wrapper{
+  z-index: 99;
+  backdrop-filter: blur(3px);
+}
+
+.tr-modal-wrapper .modal-title{
+  font-size: var(--fs-lg);
+}
+
+.tr-modal-wrapper .tr-modal-box{
+  max-width: unset;
+}
+
 @media screen and (max-width: 40em) {
   :root{
     font-size: 14px;

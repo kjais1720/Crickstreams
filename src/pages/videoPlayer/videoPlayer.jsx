@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState } from "react";``
 import { useParams } from "react-router";
 import YouTube from "react-youtube";
+import { PlaylistModal } from "components";
 
-import { useVideos, useUserResources, resourcesApiStateEnums } from "contexts";
+import { useAuth, useVideos, useUserResources, resourcesApiStateEnums } from "contexts";
 import { LoaderForComponent } from "components";
 import { useEffect } from "react";
 
@@ -10,8 +11,24 @@ export function VideoPlayer() {
   const { id } = useParams();
   const { videos, isLoading } = useVideos();
   const [currentVideo, setCurrentVideo] = useState({});
-  const { resourcesApiDispatch } = useUserResources();
-  const { ADD_TO_HISTORY } = resourcesApiStateEnums;
+  const [ showPlaylistModal, setShowPlaylistModal ] = useState(false)
+  const {
+    resourcesApiDispatch,
+    userResources: { likes: likedVideos, watchlater },
+  } = useUserResources();
+  const {
+    ADD_TO_LIKES,
+    ADD_TO_WATCHLATER,
+    REMOVE_FROM_WATCHLATER,
+    REMOVE_FROM_LIKES,
+    ADD_TO_HISTORY
+  } = resourcesApiStateEnums;
+
+  const {
+    userState: { isLoggedIn },
+    setShowAuthModal,
+  } = useAuth();
+
   useEffect(() => {
     const foundVideo = videos.find((video) => video._id === id);
     if (foundVideo) {
@@ -19,6 +36,32 @@ export function VideoPlayer() {
       resourcesApiDispatch({ type: ADD_TO_HISTORY, payload: foundVideo });
     }
   }, [videos, isLoading]);
+
+  const isLiked = likedVideos.some((video) => video._id === id);
+  const isAddedToWatchlater = watchlater.some((video) => video._id === id);
+
+  const checkAuth = (functionToExecute) => {
+    if (isLoggedIn) {
+      functionToExecute();
+    } else {
+      setShowAuthModal(true);
+      toast.error("You need to login first!");
+    }
+  };
+
+  const addToLikes = () =>
+    isLiked
+      ? resourcesApiDispatch({ type: REMOVE_FROM_LIKES, payload: id })
+      : resourcesApiDispatch({ type: ADD_TO_LIKES, payload: currentVideo });
+
+  const addToWatchlater = () =>
+    isAddedToWatchlater
+      ? resourcesApiDispatch({ type: REMOVE_FROM_WATCHLATER, payload: id })
+      : resourcesApiDispatch({ type: ADD_TO_WATCHLATER, payload: currentVideo });
+
+  const openPlaylistModal = () => setShowPlaylistModal(true);
+  
+  const closePlaylistModal = () => setShowPlaylistModal(false);
 
   const { title, description, thumbnailHigh, author, likes, views, videoId } =
     currentVideo;
@@ -42,15 +85,24 @@ export function VideoPlayer() {
           <div class="d-flex w-100 justify-c-space-between f-wrap">
             <h3 className='txt-gray'>{views} views</h3>
             <div className="d-flex gap-sm">
-              <button className="pd-xs radius-xs bg-primary bd-none txt-white txt-md d-flex gap-xs align-i-center">
+              <button 
+                className={`pd-xs radius-xs ${isLiked ? "bg-accent" : "bg-primary"} bd-none txt-white txt-md d-flex gap-xs align-i-center`}
+                onClick={()=>checkAuth(addToLikes)}
+                >
                 <i className={`far fa-thumbs-up`}></i>
                 Like
               </button>
-              <button className="pd-xs radius-xs bg-primary bd-none txt-white txt-md d-flex gap-xs align-i-center">
+              <button 
+                className={`pd-xs radius-xs ${isAddedToWatchlater ? "bg-accent" : "bg-primary"} bd-none txt-white txt-md d-flex gap-xs align-i-center`}
+                onClick={()=>checkAuth(addToWatchlater)}
+                >
                 <i className={`far fa-clock`}></i>
                 Watchlater
               </button>
-              <button className="pd-xs radius-xs bg-primary bd-none txt-white txt-md d-flex gap-xs align-i-center">
+              <button 
+                className={`pd-xs radius-xs bg-primary bd-none txt-white txt-md d-flex gap-xs align-i-center`}
+                onClick={()=>checkAuth(openPlaylistModal)}
+                >
                 <i className={`far fa-list`}></i>
                 Add to Playlist
               </button>
@@ -74,6 +126,7 @@ export function VideoPlayer() {
         </div>
         <button className="tr-btn tr-btn-cta"> Add note</button>
       </form>
+       { showPlaylistModal ? <PlaylistModal selectedVideo={currentVideo} closePlaylistModal={closePlaylistModal} /> : ""}
     </main>
   );
 }
