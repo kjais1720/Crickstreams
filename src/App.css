@@ -26,6 +26,17 @@ body{
   color: var(--tr-white);
 }
 
+.App{
+  max-width: 120rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer{
+  margin-top: auto;
+}
+
 /* utilities */
 .ml-auto{
   margin-left: auto;
@@ -107,7 +118,11 @@ main{
   border-radius: var(--radius-xs);
 }
 
-@media screen and (max-width: 45em) {
+.video-player-page{
+  grid-template-columns: 4fr 2fr;
+}
+
+@media screen and (max-width: 40em) {
   :root{
     font-size: 14px;
   }
@@ -126,5 +141,8 @@ main{
   }
   header .nav.active{
     display: flex;
+  }
+  .video-player-page{
+    grid-template-columns: 1fr;
   }
 }

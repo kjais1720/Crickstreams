@@ -6,6 +6,7 @@ import {
   VideoListing,
   Playlists,
   NotFound,
+  VideoPlayer,
 } from "pages";
 import { AuthMiddleware } from "authMiddleware";
 import { VideosProvider, UserResourcesProvider } from "contexts";
@@ -25,6 +26,10 @@ export function AppPages({ categories }) {
               <Route
                 path="/explore/:category"
                 element={<VideoListing categories={categories} />}
+              />
+              <Route
+                path="/video/:id"
+                element={<VideoPlayer/>}
               />
               <Route element={<AuthMiddleware />}>
                 <Route path="/liked-videos" element={<LikedVideos />} />
