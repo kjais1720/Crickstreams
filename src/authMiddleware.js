@@ -8,14 +8,12 @@ export function AuthMiddleware() {
     userState: { isLoggedIn },
     setShowAuthModal
   } = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!localStorage.getItem('userToken')) {
       setShowAuthModal(true)
-      navigate(-1)
-      toast.error("You need to login first!");
+      toast.error("You need to login to access this page!");
     }
-  }, []);
-  return isLoggedIn ? <Outlet /> : "";
+  },[isLoggedIn]);
+  return localStorage.getItem('userToken') ? <Outlet /> : <Navigate to="/explore" />;
 }

@@ -5,11 +5,15 @@ import { toast } from "react-toastify";
 
 export function Header() {
   const [showNav, setShowNav] = useState(false);
-  const { userState:{isLoggedIn} ,userDispatch, setShowAuthModal } = useAuth();
+  const {
+    userState: { isLoggedIn },
+    userDispatch,
+    setShowAuthModal,
+  } = useAuth();
   const hamburgerClickHandler = () => setShowNav((prev) => !prev);
   const loginClickHandler = () => setShowAuthModal(true);
   const logoutClickHandler = () => {
-    userDispatch({ type: "logout" })
+    userDispatch({ type: "logout" });
     toast.success("Logged out successfully!");
   };
 
@@ -41,13 +45,13 @@ export function Header() {
         <NavLink to="/">Cricstreams</NavLink>
       </h2>
       <button
-        className="hamburger ml-auto tr-btn tr-btn-icon hide"
+        className="hamburger mr-left-auto tr-btn tr-btn-icon hide"
         onClick={hamburgerClickHandler}
       >
         <i className="fas fa-bars"></i>
       </button>
       <ul
-        className={`nav ml-auto d-flex align-i-center gap-sm ${
+        className={`nav mr-left-auto d-flex align-i-center gap-sm ${
           showNav && "active"
         }`}
       >
