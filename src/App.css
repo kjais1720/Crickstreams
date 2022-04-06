@@ -38,9 +38,6 @@ body{
 }
 
 /* utilities */
-.ml-auto{
-  margin-left: auto;
-}
 
 .flex-1{
   flex: 1;
@@ -100,6 +97,10 @@ main{
 
 .tr-card .subtitle{
   color: var(--tr-gray);
+}
+
+.horizontal-card-container{
+  flex-basis: 32rem;
 }
 
 /* tooltip for the card title  */

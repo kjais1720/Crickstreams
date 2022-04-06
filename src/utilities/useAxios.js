@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from "react";
-import { useAuth } from "contexts"
+import { useAuth } from "contexts";
 import axios from "axios";
 
 const apiReducer = (state, { type, payload }) => {
@@ -32,19 +32,16 @@ export const useAxios = (apiUrl, method = "get", postData) => {
     isLoading: false,
   });
 
-  const { userState : {isLoggedIn} } = useAuth();
-  useEffect(()=>{ //To update the encodedToken in the header everytime user logs in or logs out
-    const userToken = localStorage.getItem("userToken");
-    axios.interceptors.request.use(
-      (config) => {
-        config.headers.authorization = userToken //As a fallback if for some reason the token in localstorage is not removed ;
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
-      }
-    );
-  },[isLoggedIn])
+  axios.interceptors.request.use(
+    (config) => {
+      const userToken = localStorage.getItem("userToken");
+      config.headers.authorization = userToken; //As a fallback if for some reason the token in localstorage is not removed ;
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
 
   const getData = async () => {
     const userToken = localStorage.getItem("userToken");

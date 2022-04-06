@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
-import { truncateText, isItemInList } from "utilities";
 import { DropDownMenu } from "components";
 import {
   useUserResources,
   resourcesDispatchConstants,
   useAuth,
 } from "contexts";
+import { isItemInList } from "utilities";
 import { toast } from "react-toastify";
 
-export function VideoCard({ video, setPlaylistModalState }) {
+export function HorizontalVideoCard({
+  video,
+  setPlaylistModalState,
+  deleteButton,
+}) {
   const {
     _id: id,
     title,
     thumbnailHigh: { url: imgUrl },
     author,
-    likes,
-    views,
-    videoId,
   } = video;
   const {
     userResourcesDispatch,
@@ -24,7 +25,7 @@ export function VideoCard({ video, setPlaylistModalState }) {
   } = useUserResources();
   const {
     ADD_TO_LIKES,
-    ADD_TO_WATCH_LATER,
+    ADD_TO_WATCHLATER,
     REMOVE_FROM_WATCH_LATER,
     REMOVE_FROM_LIKES,
   } = resourcesDispatchConstants;
@@ -54,7 +55,7 @@ export function VideoCard({ video, setPlaylistModalState }) {
   const addToWatchlater = () =>
     isAddedToWatchlater
       ? userResourcesDispatch({ type: REMOVE_FROM_WATCH_LATER, payload: id })
-      : userResourcesDispatch({ type: ADD_TO_WATCH_LATER, payload: video });
+      : userResourcesDispatch({ type: ADD_TO_WATCHLATER, payload: video });
 
   const openPlaylistModal = () => {
     setPlaylistModalState({
@@ -87,29 +88,30 @@ export function VideoCard({ video, setPlaylistModalState }) {
     },
   ];
   return (
-    <article className="tr-card bg-transparent bd-none bs-lighter flex-col align-s-stretch pd-xs">
-      <div className="tr-card-banner">
-        <img
-          className="w-100"
-          src={imgUrl}
-          alt={title}
-          onError={({ currentTarget }) => {
-            // Fallback image if the image link breaks in future
-            currentTarget.onerror = null; // prevents looping
-            currentTarget.src = `/assets/fallback-image.png`;
-          }}
-        />
-      </div>
-      <div className="tr-card-body flex-col gap-xs justify-c-space-between">
-        <h2 className="title p-rel txt-md" data-title={title}>
-          <Link to={`/video/${id}`}>{truncateText(title, 30)}</Link>
+    <article
+      className="d-grid bg-secondary bs-lighter radius-xs"
+      style={{ gridTemplateColumns: "1.5fr 4fr" }}
+    >
+      <figure>
+        <img className="radius-xs h-100" src={imgUrl} alt={title}></img>
+      </figure>
+      <div className="card-body flex-col pd-xs gap-xs">
+        <h2 className="txt-md">
+          <Link to={`/video/${id}`}>{title}</Link>
         </h2>
-        <div className="d-flex justify-c-space-between align-i-center gap-sm">
-          <div>
-            <h3 className="subtitle txt-sm">{author}</h3>
-            <h3 className="subtitle txt-sm">{views} views</h3>
-          </div>
+        <h3 className="txt-sm txt-gray">{author}</h3>
+        <div className="d-flex gap-md mr-top-auto">
           <DropDownMenu menuButtons={dropdownButtons} />
+          {deleteButton ? (
+            <button
+              className="tr-btn tr-btn-icon"
+              onClick={() => deleteButton.clickHandler(id)}
+            >
+              <i className="far fa-trash txt-error"></i>
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </article>

@@ -1,9 +1,8 @@
 import { InputField } from "./inputField";
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import { useAxios } from "utilities";
 import { useAuth } from "contexts";
 import { ButtonLoader } from "components";
+
 import { formFields, validateInput, isFormValid } from "../utilities";
 
 /**
@@ -30,31 +29,14 @@ export function FormComponent({ formType, styles }) {
 
   const [formData, setFormData] = useState(defaultFormState);
   const [formError, setFormError] = useState(defaultError);
+  const [ actionType, setActionType ] = useState("login")
 
-  const [apiUrl, setApiUrl] = useState("");
-  const [dataToPost, setDataToPost] = useState({});
-  const { userDispatch, setShowAuthModal } = useAuth();
-
-  const { serverResponse, isLoading, serverError } = useAxios(
-    apiUrl,
-    "post",
-    dataToPost
-  );
-  useEffect(() => {
+  const { loginSignupHandler, serverResponse, serverError, isLoading } = useAuth();
+ 
+  useEffect(() => { // To handle response from the server
     if (serverResponse.status === 201 || serverResponse.status === 200) {
-      const user = serverResponse.data.user;
-      localStorage.setItem("userToken", serverResponse.data.encodedToken);
-      userDispatch({
-        type: "login",
-        payload: user,
-      });
       setFormData({ ...defaultFormState });
       setFormError({ ...defaultError });
-      // Fire toast
-      serverResponse.status === 200
-        ? toast.success(`Logged in. Welcome back ${user.firstName}`)
-        : toast.success(`Signed up. Welcome aboard ${user.firstName}`);
-      setShowAuthModal(false);
     } else if (serverError.response?.status === 422) {
       setFormError((prev) => ({ ...prev, email: "This email already exists" }));
     } else if (serverError.response?.status === 401) {
@@ -63,6 +45,7 @@ export function FormComponent({ formType, styles }) {
       setFormError((prev) => ({ ...prev, email: "Email doesn't exists" }));
     }
   }, [serverResponse, serverError]);
+
 
   useEffect(() => {
     setFormData({ ...defaultError });
@@ -77,18 +60,10 @@ export function FormComponent({ formType, styles }) {
     setFormError((prevError) => ({ ...prevError, [name]: error }));
   };
 
-  const formSubmitHandler = async (e, route, data) => {
+  const formSubmitHandler = (e, route, data, action) => {
     e.preventDefault();
-    const requiredPostData = {
-      email: data.email,
-      password: data.password,
-    };
-    if (route === "/api/auth/signup") {
-      requiredPostData.firstName = data.firstName;
-      requiredPostData.lastName = data.lastName;
-    }
-    setApiUrl(route);
-    setDataToPost(requiredPostData);
+    setActionType(action)
+    loginSignupHandler(route, data)
   };
 
   const disableSubmit = isFormValid(formError, formData);
@@ -129,17 +104,17 @@ export function FormComponent({ formType, styles }) {
         } tr-btn tr-btn-cta stretch-x`}
         type="submit"
         disabled={!disableSubmit}
-        onClick={(e) => formSubmitHandler(e, "/api/auth/login", formData)}
+        onClick={(e) => formSubmitHandler(e, "/api/auth/login", formData, "login")}
       >
-        {isLoading ? <ButtonLoader /> : "Login"}
+        {isLoading && actionType==="login" ? <ButtonLoader /> : "Login"}
       </button>
       <button
         className="tr-btn tr-btn-outline-primary stretch-x"
         onClick={(e) =>
-          formSubmitHandler(e, "/api/auth/login", guestCredentials)
+          formSubmitHandler(e, "/api/auth/login", guestCredentials, "guestLogin")
         }
       >
-        Guest Login
+        {isLoading && actionType==="guestLogin" ? <ButtonLoader /> : "Guest Login"}
       </button>
     </form>
   ) : (
@@ -176,9 +151,9 @@ export function FormComponent({ formType, styles }) {
         } tr-btn tr-btn-cta stretch-x`}
         type="submit"
         disabled={!disableSubmit}
-        onClick={(e) => formSubmitHandler(e, "/api/auth/signup", formData)}
+        onClick={(e) => formSubmitHandler(e, "/api/auth/signup", formData, "signup")}
       >
-        {isLoading ? <ButtonLoader /> : "Signup"}
+        {isLoading && actionType==="signup" ? <ButtonLoader /> : "Signup"}
       </button>
     </form>
   );

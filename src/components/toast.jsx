@@ -6,6 +6,7 @@ export function Toast(){
   <ToastContainer
     position={"bottom-right"}
     autoClose={1000}
+    theme={"dark"}
     draggable
   />)
 }

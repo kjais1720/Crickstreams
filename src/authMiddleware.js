@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useNavigate } from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "contexts";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
@@ -8,14 +8,12 @@ export function AuthMiddleware() {
     userState: { isLoggedIn },
     setShowAuthModal
   } = useAuth();
-  const navigate = useNavigate();
-
+  const location = useLocation();
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!localStorage.getItem('userToken')) {
       setShowAuthModal(true)
-      navigate(-1)
-      toast.error("You need to login first!");
+      toast.error("You need to login to access this page!");
     }
-  }, []);
-  return isLoggedIn ? <Outlet /> : "";
+  },[isLoggedIn]);
+  return localStorage.getItem('userToken') ? <Outlet /> : <Navigate to="/explore" state={{from:location}} />;
 }

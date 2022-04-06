@@ -1,4 +1,4 @@
-import styles from "./loader.module.css";
+import styles from "./styles/loader.module.css";
 export function LoaderForComponent() {
   return (
     <div className={styles.loaderWrapper}>

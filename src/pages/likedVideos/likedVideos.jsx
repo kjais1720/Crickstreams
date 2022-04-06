@@ -1,8 +1,12 @@
+import { useUserResources, resourcesDispatchConstants } from "contexts";
+import { SinglePlaylistPage } from "components";
+
 export function LikedVideos() {
-  document.title = "Liked videos | Crickstreams";
+  const pageTitle = "Liked Videos";
+  const {
+    userResources: { likes },
+  } = useUserResources();
   return (
-    <main>
-      <h1>This is Liked videos Page</h1>
-    </main>
+    <SinglePlaylistPage playlistTitle={pageTitle} playlistVideos={likes} />
   );
 }

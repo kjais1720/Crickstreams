@@ -5,5 +5,7 @@ export { LikedVideos } from "./likedVideos/likedVideos";
 export { Playlists } from "./playlists/playlists";
 export { VideoListing } from "./videoListing/videoListing";
 export { NotFound } from "./error/notFound";
+export { NoVideosToShow } from "./error/noVideos";
 export { AppPages } from "./appPages/appPages";
 export { VideoPlayer } from "./videoPlayer/videoPlayer";
+export { WatchLater } from "./watchLater/watchLater";
