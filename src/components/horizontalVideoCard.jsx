@@ -14,9 +14,6 @@ export function HorizontalVideoCard({
     title,
     thumbnailHigh: { url: imgUrl },
     author,
-    likes,
-    views,
-    videoId,
   } = video;
   const {
     userResourcesDispatch,
@@ -92,7 +89,7 @@ export function HorizontalVideoCard({
       style={{ gridTemplateColumns: "1.5fr 4fr" }}
     >
       <figure>
-        <img className="radius-xs h-100" src={imgUrl}></img>
+        <img className="radius-xs h-100" src={imgUrl} alt={title}></img>
       </figure>
       <div className="card-body flex-col pd-xs gap-xs">
         <h2 className="txt-md">
