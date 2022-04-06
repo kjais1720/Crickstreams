@@ -15,13 +15,13 @@ export function VideoCard({ video, setPlaylistModalState }) {
     videoId,
   } = video;
   const {
-    resourcesApiDispatch,
+    userResourcesDispatch,
     userResources: { likes: likedVideos, watchlater },
   } = useUserResources();
   const {
     ADD_TO_LIKES,
-    ADD_TO_WATCHLATER,
-    REMOVE_FROM_WATCHLATER,
+    ADD_TO_WATCH_LATER,
+    REMOVE_FROM_WATCH_LATER,
     REMOVE_FROM_LIKES,
   } = resourcesApiStateEnums;
 
@@ -44,13 +44,13 @@ export function VideoCard({ video, setPlaylistModalState }) {
 
   const addToLikes = () =>
     isLiked
-      ? resourcesApiDispatch({ type: REMOVE_FROM_LIKES, payload: id })
-      : resourcesApiDispatch({ type: ADD_TO_LIKES, payload: video });
+      ? userResourcesDispatch({ type: REMOVE_FROM_LIKES, payload: id })
+      : userResourcesDispatch({ type: ADD_TO_LIKES, payload: video });
 
   const addToWatchlater = () =>
     isAddedToWatchlater
-      ? resourcesApiDispatch({ type: REMOVE_FROM_WATCHLATER, payload: id })
-      : resourcesApiDispatch({ type: ADD_TO_WATCHLATER, payload: video });
+      ? userResourcesDispatch({ type: REMOVE_FROM_WATCH_LATER, payload: id })
+      : userResourcesDispatch({ type: ADD_TO_WATCH_LATER, payload: video });
 
   const openPlaylistModal = () => {
     setPlaylistModalState({

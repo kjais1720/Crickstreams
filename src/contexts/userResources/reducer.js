@@ -11,8 +11,8 @@ export const resourcesApiStateEnums = {
   CLEAR_HISTORY: "CLEAR_HISTORY",
   ADD_TO_LIKES: "ADD_TO_LIKES",
   REMOVE_FROM_LIKES: "REMOVE_FROM_LIKES",
-  ADD_TO_WATCHLATER: "ADD_TO_WATCHLATER",
-  REMOVE_FROM_WATCHLATER: "REMOVE_FROM_WATCHLATER",
+  ADD_TO_WATCH_LATER: "ADD_TO_WATCH_LATER",
+  REMOVE_FROM_WATCH_LATER: "REMOVE_FROM_WATCH_LATER",
 };
 
 const {
@@ -26,8 +26,8 @@ const {
   CLEAR_HISTORY,
   ADD_TO_LIKES,
   REMOVE_FROM_LIKES,
-  ADD_TO_WATCHLATER,
-  REMOVE_FROM_WATCHLATER,
+  ADD_TO_WATCH_LATER,
+  REMOVE_FROM_WATCH_LATER,
 } = resourcesApiStateEnums;
 
 export const apiReducer = (state, { type, payload }) => {
@@ -114,7 +114,7 @@ export const apiReducer = (state, { type, payload }) => {
         toastMessage: "Video removed from likes",
         toastType: "success",
       };
-    case ADD_TO_WATCHLATER:
+    case ADD_TO_WATCH_LATER:
       return {
         ...state,
         url: `/api/user/watchlater`,
@@ -123,7 +123,7 @@ export const apiReducer = (state, { type, payload }) => {
         toastMessage: "Added to watch later",
         toastType: "success",
       };
-    case REMOVE_FROM_WATCHLATER:
+    case REMOVE_FROM_WATCH_LATER:
       return {
         ...state,
         url: `/api/user/watchlater/${payload}`,
@@ -147,5 +147,5 @@ export const userResourceStateEnums = {
   UPDATE_PLAYLISTS: "UPDATE_PLAYLISTS",
   UPDATE_HISTORY: "UPDATE_HISTORY",
   UPDATE_LIKED: "UPDATE_LIKED",
-  UPDATE_WATCHLATER: "UPDATE_WATCHLATER",
+  UPDATE_WATCH_LATER: "UPDATE_WATCH_LATER",
 };

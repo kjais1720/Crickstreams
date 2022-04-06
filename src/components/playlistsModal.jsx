@@ -3,7 +3,7 @@ import { useUserResources, resourcesApiStateEnums } from "contexts";
 
 export function PlaylistModal({ selectedVideo, closePlaylistModal }) {
   const {
-    resourcesApiDispatch,
+    userResourcesDispatch,
     userResources: { playlists },
   } = useUserResources();
   const { ADD_TO_PLAYLIST, ADD_NEW_PLAYLIST, REMOVE_FROM_PLAYLIST } =
@@ -12,21 +12,21 @@ export function PlaylistModal({ selectedVideo, closePlaylistModal }) {
 
   const createPlaylist = () => {
     newPlaylistName &&
-    resourcesApiDispatch({
-      type: ADD_NEW_PLAYLIST,
-      payload: { title: newPlaylistName },
-    });
+      userResourcesDispatch({
+        type: ADD_NEW_PLAYLIST,
+        payload: { title: newPlaylistName },
+      });
     setNewPlaylistName("");
   };
   const optionClick = (e, playlistId) => {
     const { checked } = e.target;
     if (checked) {
-      resourcesApiDispatch({
+      userResourcesDispatch({
         type: ADD_TO_PLAYLIST,
         payload: { playlistId: playlistId, video: selectedVideo },
       });
     } else {
-      resourcesApiDispatch({
+      userResourcesDispatch({
         type: REMOVE_FROM_PLAYLIST,
         payload: `${playlistId}/${selectedVideo._id}`,
       });
@@ -66,13 +66,20 @@ export function PlaylistModal({ selectedVideo, closePlaylistModal }) {
       >
         <div className="tr-modal-text d-flex gap-xs justify-c-space-between align-i-center">
           <h2 className="modal-title">Add to..</h2>
-          <button onClick={closePlaylistModal} className="pd-xs bd-none bg-transparent txt-accent txt-lg txt-lighter">
+          <button
+            onClick={closePlaylistModal}
+            className="pd-xs bd-none bg-transparent txt-accent txt-lg txt-lighter"
+          >
             <i className="fas fa-times txt-light"></i>
           </button>
         </div>
 
         <div className="tr-modal-options flex-col gap-xs">
-          {playlists[0] ? playlists.map(createOptions) : <p className="txt-md txt-gray">No playlist to show</p>}
+          {playlists[0] ? (
+            playlists.map(createOptions)
+          ) : (
+            <p className="txt-md txt-gray">No playlist to show</p>
+          )}
         </div>
 
         <div className="tr-modal-buttons flex-col gap-xs">

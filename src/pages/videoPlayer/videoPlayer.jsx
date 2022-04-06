@@ -1,9 +1,15 @@
-import { useState } from "react";``
+import { useState } from "react";
+``;
 import { useParams } from "react-router";
 import YouTube from "react-youtube";
 import { PlaylistModal } from "components";
 
-import { useAuth, useVideos, useUserResources, resourcesApiStateEnums } from "contexts";
+import {
+  useAuth,
+  useVideos,
+  useUserResources,
+  resourcesApiStateEnums,
+} from "contexts";
 import { LoaderForComponent } from "components";
 import { useEffect } from "react";
 
@@ -11,17 +17,17 @@ export function VideoPlayer() {
   const { id } = useParams();
   const { videos, isLoading } = useVideos();
   const [currentVideo, setCurrentVideo] = useState({});
-  const [ showPlaylistModal, setShowPlaylistModal ] = useState(false)
+  const [showPlaylistModal, setShowPlaylistModal] = useState(false);
   const {
-    resourcesApiDispatch,
+    userResourcesDispatch,
     userResources: { likes: likedVideos, watchlater },
   } = useUserResources();
   const {
     ADD_TO_LIKES,
-    ADD_TO_WATCHLATER,
-    REMOVE_FROM_WATCHLATER,
+    ADD_TO_WATCH_LATER,
+    REMOVE_FROM_WATCH_LATER,
     REMOVE_FROM_LIKES,
-    ADD_TO_HISTORY
+    ADD_TO_HISTORY,
   } = resourcesApiStateEnums;
 
   const {
@@ -33,7 +39,7 @@ export function VideoPlayer() {
     const foundVideo = videos.find((video) => video._id === id);
     if (foundVideo) {
       setCurrentVideo({ ...foundVideo });
-      resourcesApiDispatch({ type: ADD_TO_HISTORY, payload: foundVideo });
+      userResourcesDispatch({ type: ADD_TO_HISTORY, payload: foundVideo });
     }
   }, [videos, isLoading]);
 
@@ -51,16 +57,19 @@ export function VideoPlayer() {
 
   const addToLikes = () =>
     isLiked
-      ? resourcesApiDispatch({ type: REMOVE_FROM_LIKES, payload: id })
-      : resourcesApiDispatch({ type: ADD_TO_LIKES, payload: currentVideo });
+      ? userResourcesDispatch({ type: REMOVE_FROM_LIKES, payload: id })
+      : userResourcesDispatch({ type: ADD_TO_LIKES, payload: currentVideo });
 
   const addToWatchlater = () =>
     isAddedToWatchlater
-      ? resourcesApiDispatch({ type: REMOVE_FROM_WATCHLATER, payload: id })
-      : resourcesApiDispatch({ type: ADD_TO_WATCHLATER, payload: currentVideo });
+      ? userResourcesDispatch({ type: REMOVE_FROM_WATCH_LATER, payload: id })
+      : userResourcesDispatch({
+          type: ADD_TO_WATCH_LATER,
+          payload: currentVideo,
+        });
 
   const openPlaylistModal = () => setShowPlaylistModal(true);
-  
+
   const closePlaylistModal = () => setShowPlaylistModal(false);
 
   const { title, description, thumbnailHigh, author, likes, views, videoId } =
@@ -83,26 +92,30 @@ export function VideoPlayer() {
         <div className="video-details flex-col gap-xs">
           <h2 className="txt-md">{title}</h2>
           <div class="d-flex w-100 justify-c-space-between f-wrap">
-            <h3 className='txt-gray'>{views} views</h3>
+            <h3 className="txt-gray">{views} views</h3>
             <div className="d-flex gap-sm">
-              <button 
-                className={`pd-xs radius-xs ${isLiked ? "bg-accent" : "bg-primary"} bd-none txt-white txt-md d-flex gap-xs align-i-center`}
-                onClick={()=>checkAuth(addToLikes)}
-                >
+              <button
+                className={`pd-xs radius-xs ${
+                  isLiked ? "bg-accent" : "bg-primary"
+                } bd-none txt-white txt-md d-flex gap-xs align-i-center`}
+                onClick={() => checkAuth(addToLikes)}
+              >
                 <i className={`far fa-thumbs-up`}></i>
                 Like
               </button>
-              <button 
-                className={`pd-xs radius-xs ${isAddedToWatchlater ? "bg-accent" : "bg-primary"} bd-none txt-white txt-md d-flex gap-xs align-i-center`}
-                onClick={()=>checkAuth(addToWatchlater)}
-                >
+              <button
+                className={`pd-xs radius-xs ${
+                  isAddedToWatchlater ? "bg-accent" : "bg-primary"
+                } bd-none txt-white txt-md d-flex gap-xs align-i-center`}
+                onClick={() => checkAuth(addToWatchlater)}
+              >
                 <i className={`far fa-clock`}></i>
                 Watchlater
               </button>
-              <button 
+              <button
                 className={`pd-xs radius-xs bg-primary bd-none txt-white txt-md d-flex gap-xs align-i-center`}
-                onClick={()=>checkAuth(openPlaylistModal)}
-                >
+                onClick={() => checkAuth(openPlaylistModal)}
+              >
                 <i className={`far fa-list`}></i>
                 Add to Playlist
               </button>
@@ -126,7 +139,14 @@ export function VideoPlayer() {
         </div>
         <button className="tr-btn tr-btn-cta"> Add note</button>
       </form>
-       { showPlaylistModal ? <PlaylistModal selectedVideo={currentVideo} closePlaylistModal={closePlaylistModal} /> : ""}
+      {showPlaylistModal ? (
+        <PlaylistModal
+          selectedVideo={currentVideo}
+          closePlaylistModal={closePlaylistModal}
+        />
+      ) : (
+        ""
+      )}
     </main>
   );
 }
