@@ -32,8 +32,7 @@ export function LikedVideos() {
   return likes.length ? (
     <main className="d-flex gap-xs align-i-start pd-lg">
       <article
-        className="tr-card pd-0 radius-xs bs-lighter p-sticky align-s-start bg-secondary bd-none"
-        style={{ top: "0" }}
+        className="tr-card pd-0 radius-xs bs-lighte align-s-start bg-secondary bd-none"
       >
         <figure>
           <img className="radius-xs" src={playlistBanner}></img>
