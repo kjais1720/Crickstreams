@@ -7,6 +7,7 @@ import {
   Playlists,
   NotFound,
   VideoPlayer,
+  WatchLater,
 } from "pages";
 import { AuthMiddleware } from "authMiddleware";
 import { VideosProvider, UserResourcesProvider } from "contexts";
@@ -35,6 +36,7 @@ export function AppPages({ categories }) {
                 <Route path="/liked-videos" element={<LikedVideos />} />
                 <Route path="/history" element={<History />} />
                 <Route path="/playlists" element={<Playlists />} />
+                <Route path="/watch-later" element={<WatchLater />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>

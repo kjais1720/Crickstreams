@@ -11,7 +11,8 @@ export function VideoListing({ categories }) {
     show: false,
     selectedVideo: {},
   });
-  const closePlaylistModal = () => setPlaylistModalState({show:false, selectedVideo:{}})
+  const closePlaylistModal = () =>
+    setPlaylistModalState({ show: false, selectedVideo: {} });
   //To check whether the category found from the url is a valid category or not
   // Also, initially the "categories array would be empty until a response is recieved from the server"
   // So if the user is on a valid category page and tries to reload the page, the categories array would be empty and the statement would be false
@@ -44,7 +45,7 @@ export function VideoListing({ categories }) {
         };
   const createLinkChip = ({ categoryName, linkPath, _id }) => (
     <Link
-      className="pd-xs txt-bold radius-md bd-1 txt-accent"
+      className="pd-xs txt-bold radius-xs bd-1 txt-accent"
       key={_id}
       to={linkPath}
       style={getActiveChipStyle(categoryName)}

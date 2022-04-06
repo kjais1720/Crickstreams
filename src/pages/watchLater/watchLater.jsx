@@ -4,15 +4,13 @@ import { HorizontalVideoCard, PlaylistModal } from "components";
 import { NoVideosToShow } from "pages";
 import { setDocumentTitle } from "utilities";
 
-export function LikedVideos() {
-  const pageTitle = "Liked videos | Crickstreams";
+export function WatchLater() {
+  const pageTitle = "Watch later | Crickstreams";
   setDocumentTitle(pageTitle);
 
   const {
-    userResources: { likes },
-    resourceApiDispatch,
+    userResources: { watchlater },
   } = useUserResources();
-  const { REMOVE_FROM_LIKES } = resourcesApiStateEnums;
 
   const [playlistModalState, setPlaylistModalState] = useState({
     show: false,
@@ -21,30 +19,27 @@ export function LikedVideos() {
   const [playlistBanner, setPlaylistBanner] = useState({});
   const closePlaylistModal = () =>
     setPlaylistModalState({ show: false, selectedVideo: {} });
-  const removeFromLikes = (id) => {
-    resourceApiDispatch({ type: REMOVE_FROM_LIKES, payload: id });
-  };
-  useEffect(() => {
-    likes[0] && setPlaylistBanner(likes[0].thumbnailHigh.url);
-  }, [likes]);
-  const totalVideos = likes.length;
 
-  return likes.length ? (
-    <main className="d-flex gap-xs align-i-start pd-lg">
+    useEffect(() => {
+    watchlater[0] && setPlaylistBanner(watchlater[0].thumbnailHigh.url);
+  }, [watchlater]);
+  const totalVideos = watchlater.length;
+
+  return watchlater.length ? (
+    <main className="d-flex gap-xs align-i-start pd-lg f-wrap">
       <article
-        className="tr-card pd-0 radius-xs bs-lighter p-sticky align-s-start bg-secondary bd-none"
-        style={{ top: "0" }}
+        className="tr-card pd-0 radius-xs bs-lighter align-s-start bg-secondary bd-none"
       >
         <figure>
           <img className="radius-xs" src={playlistBanner}></img>
         </figure>
         <div className="pd-sm">
-          <h2>Your Likes</h2>
+          <h2>Your watchlater</h2>
           <p>{totalVideos} videos</p>
         </div>
       </article>
-      <div className="flex-col gap-xs flex-1">
-        {likes.map((video) => (
+      <div className="flex-col gap-xs flex-1" style={{flexBasis:"500px"}}>
+        {watchlater.map((video) => (
           <HorizontalVideoCard
             key={video._id}
             video={video}
