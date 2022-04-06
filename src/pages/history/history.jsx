@@ -39,7 +39,7 @@ export function History() {
         </button>
       </div>
       <div class="d-flex gap-xs">
-        <article className="tr-card pd-0 radius-xs bs-lighter align-s-start bg-primary bd-none">
+        <article className="tr-card pd-0 radius-xs bs-lighter align-s-start bg-secondary bd-none">
           <figure>
             <img className="radius-xs" src={playlistBanner}></img>
           </figure>
@@ -48,7 +48,7 @@ export function History() {
             <p>{totalVideos} videos</p>
           </div>
         </article>
-        <div className="flex-col gap-xs flex-1">
+        <div className="horizontal-card-container flex-col gap-xs flex-1">
           {history.map((video) => (
             <HorizontalVideoCard
               key={video._id}

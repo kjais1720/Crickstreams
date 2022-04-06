@@ -99,6 +99,10 @@ main{
   color: var(--tr-gray);
 }
 
+.horizontal-card-container{
+  flex-basis: 32rem;
+}
+
 /* tooltip for the card title  */
 .tr-card .title:hover::after{
   content: attr(data-title);

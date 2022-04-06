@@ -20,16 +20,14 @@ export function WatchLater() {
   const closePlaylistModal = () =>
     setPlaylistModalState({ show: false, selectedVideo: {} });
 
-    useEffect(() => {
+  useEffect(() => {
     watchlater[0] && setPlaylistBanner(watchlater[0].thumbnailHigh.url);
   }, [watchlater]);
   const totalVideos = watchlater.length;
 
   return watchlater.length ? (
-    <main className="d-flex gap-xs align-i-start pd-lg f-wrap">
-      <article
-        className="tr-card pd-0 radius-xs bs-lighter align-s-start bg-secondary bd-none"
-      >
+    <main className="d-flex gap-xs justify-c-center pd-lg f-wrap">
+      <article className="tr-card pd-0 radius-xs bs-lighter align-s-start bg-secondary bd-none">
         <figure>
           <img className="radius-xs" src={playlistBanner}></img>
         </figure>
@@ -38,7 +36,7 @@ export function WatchLater() {
           <p>{totalVideos} videos</p>
         </div>
       </article>
-      <div className="flex-col gap-xs flex-1" style={{flexBasis:"500px"}}>
+      <div className="horizontal-card-container flex-col gap-xs flex-1">
         {watchlater.map((video) => (
           <HorizontalVideoCard
             key={video._id}

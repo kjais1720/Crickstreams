@@ -43,7 +43,7 @@ export function LikedVideos() {
           <p>{totalVideos} videos</p>
         </div>
       </article>
-      <div className="flex-col gap-xs flex-1">
+      <div className="horizontal-card-container flex-col gap-xs flex-1">
         {likes.map((video) => (
           <HorizontalVideoCard
             key={video._id}
