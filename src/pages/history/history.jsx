@@ -1,5 +1,5 @@
 import { useUserResources, resourcesApiStateEnums } from "contexts";
-import { PlaylistPage } from "components";
+import { SinglePlaylistPage } from "components";
 
 export function History() {
   const pageTitle = "History";
@@ -16,7 +16,7 @@ export function History() {
   const clearHistoryBtn = { clickHandler: clearHistory };
   const removeFromHistoryBtn = { clickHandler: removeFromHistory };
   return (
-    <PlaylistPage
+    <SinglePlaylistPage
       playlistTitle={pageTitle}
       playlistVideos={history}
       clearHistoryBtn={clearHistoryBtn}

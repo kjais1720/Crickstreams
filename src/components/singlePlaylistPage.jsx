@@ -3,7 +3,7 @@ import { HorizontalVideoCard, PlaylistModal } from "components";
 import { NoVideosToShow } from "pages";
 import { setDocumentTitle } from "utilities";
 
-export function PlaylistPage({
+export function SinglePlaylistPage({
   playlistTitle,
   playlistVideos,
   clearHistoryBtn,

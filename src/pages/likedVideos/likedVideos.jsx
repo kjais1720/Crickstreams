@@ -1,10 +1,10 @@
 import { useUserResources, resourcesApiStateEnums } from "contexts";
-import { PlaylistPage } from "components";
+import { SinglePlaylistPage } from "components";
 
 export function LikedVideos() {
   const pageTitle = "Liked Videos"
   const {
     userResources: { likes },
   } = useUserResources();
-  return(<PlaylistPage playlistTitle={pageTitle} playlistVideos = {likes} />)
+  return(<SinglePlaylistPage playlistTitle={pageTitle} playlistVideos = {likes} />)
 }
