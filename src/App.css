@@ -38,9 +38,6 @@ body{
 }
 
 /* utilities */
-.ml-auto{
-  margin-left: auto;
-}
 
 .flex-1{
   flex: 1;
