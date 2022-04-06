@@ -6,9 +6,9 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  align-items: center;
-  z-index: 100;
-  background-color: var(--tr-background);
+  align-items: start;
+  z-index: 10;
+  background-color: var(--tr-primary-color);
   box-shadow: var(--bs-lighter);
   border-radius: var(--radius-xs);
   height: 0;
@@ -20,11 +20,11 @@
 
 .dropdownWrapper:hover .dropdown{
   padding: var(--space-xs);
-  height: 6rem;
+  height: 9rem;
 }
 
 .dropdown button{
-  color: var(--tr-primary-color);
+  color: var(--tr-white);
   background-color: transparent;
   font-weight: 500;
 }

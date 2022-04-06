@@ -1,24 +1,30 @@
 import { useVideos } from "contexts";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { VideoCard } from "components";
+import { VideoCard, PlaylistModal } from "components";
 import { setDocumentTitle } from "utilities";
+import { useState } from "react";
 
 export function VideoListing({ categories }) {
   const { category } = useParams();
   const navigate = useNavigate();
-
+  const [playlistModalState, setPlaylistModalState] = useState({
+    show: false,
+    selectedVideo: {},
+  });
+  const closePlaylistModal = () => setPlaylistModalState({show:false, selectedVideo:{}})
   //To check whether the category found from the url is a valid category or not
   // Also, initially the "categories array would be empty until a response is recieved from the server"
   // So if the user is on a valid category page and tries to reload the page, the categories array would be empty and the statement would be false
   // So they will be redirected to the error page, to handle this, another condition is added which checks if the 'categories' is empty
   // If it is empty then it won't redirect the user to error page and wait for the server response
   categories.some(({ categoryName }) => categoryName === category) ||
-    category === undefined || categories.length === 0 ||
+    category === undefined ||
+    categories.length === 0 ||
     navigate("/not-found");
-    
+
   const title = `${category ? category : "All"} cricket videos | Crickstreams`;
   setDocumentTitle(title);
-  
+
   const { videos } = useVideos();
 
   const filteredVideos =
@@ -26,11 +32,12 @@ export function VideoListing({ categories }) {
       ? videos
       : videos?.filter((video) => video.categoryName === category) || [];
 
-  const getActiveChipStyle = ( categoryName ) =>
-    categoryName === category || (categoryName === "All" && category === undefined) 
+  const getActiveChipStyle = (categoryName) =>
+    categoryName === category ||
+    (categoryName === "All" && category === undefined)
       ? {
           backgroundColor: "var(--tr-accent-color)",
-          color:"var(--tr-primary-color)"
+          color: "var(--tr-primary-color)",
         }
       : {
           backgroundColor: "var(--tr-primary-overlay)",
@@ -42,7 +49,6 @@ export function VideoListing({ categories }) {
       to={linkPath}
       style={getActiveChipStyle(categoryName)}
     >
-      {" "}
       {categoryName}
     </Link>
   );
@@ -53,9 +59,21 @@ export function VideoListing({ categories }) {
       </div>
       <div className="d-grid grid-autofit-md justify-i-center gap-sm">
         {filteredVideos.map((video) => (
-          <VideoCard key={video._id} video={video} />
+          <VideoCard
+            key={video._id}
+            video={video}
+            setPlaylistModalState={setPlaylistModalState}
+          />
         ))}
       </div>
+      {playlistModalState.show ? (
+        <PlaylistModal
+          selectedVideo={playlistModalState.selectedVideo}
+          closePlaylistModal={closePlaylistModal}
+        />
+      ) : (
+        ""
+      )}
     </main>
   );
 }

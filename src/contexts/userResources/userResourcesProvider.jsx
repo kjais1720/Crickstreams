@@ -36,9 +36,10 @@ export function UserResourcesProvider({ children }) {
   const {
     userState: { isLoggedIn },
   } = useAuth();
+
   const [userResources, setUserResources] = useState(defaultResourcesState);
 
-  const [resourcesApiState, resourcesApiDispatch] = useReducer(
+  const [resourcesApiState, userResourcesDispatch] = useReducer(
     apiReducer,
     defaultApiState
   );
@@ -66,7 +67,7 @@ export function UserResourcesProvider({ children }) {
     }
   }, [serverResponse, serverError]);
 
-  useEffect(() => {
+  useEffect(() => { //To get/clear all the user resources whenever the user logs in/out
     if (isLoggedIn) {
       Promise.all([
         getUserResources("/api/user/playlists"),
@@ -88,7 +89,7 @@ export function UserResourcesProvider({ children }) {
           setUserResources(updatedUserResources);
         })
         .catch((err) => console.log(err));
-    } else { 
+    } else {
       setUserResources(defaultResourcesState);
     }
   }, [isLoggedIn]);
@@ -96,15 +97,15 @@ export function UserResourcesProvider({ children }) {
   useEffect(() => {
     if (serverError.error) {
       toast.error("An Error occured, please retry.");
-      resourcesApiDispatch({ type: "CLEAR_TOAST" });
+      userResourcesDispatch({ type: "CLEAR_TOAST" });
     } else if (resourcesApiState.toastMessage && !isLoading) {
       toast[resourcesApiState.toastType](resourcesApiState.toastMessage);
-      resourcesApiDispatch({ type: "CLEAR_TOAST" });
+      userResourcesDispatch({ type: "CLEAR_TOAST" });
     }
   }, [isLoading, resourcesApiState.toastMessage]);
   return (
     <UserResourcesContext.Provider
-      value={{ userResources, resourcesApiDispatch }}
+      value={{ userResources, userResourcesDispatch }}
     >
       {children}
     </UserResourcesContext.Provider>

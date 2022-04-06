@@ -13,6 +13,7 @@ export function LoaderForComponent() {
           className={styles.loaderCircle3 + " " + styles.loaderCircle}
         ></span>
       </div>
+      <p>loading...</p>
     </div>
   );
 }
