@@ -32,7 +32,7 @@ export function WatchLater() {
           <img className="radius-xs" src={playlistBanner}></img>
         </figure>
         <div className="pd-sm">
-          <h2>Your watchlater</h2>
+          <h2>Watch Later</h2>
           <p>{totalVideos} videos</p>
         </div>
       </article>

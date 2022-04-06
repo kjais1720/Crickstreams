@@ -38,7 +38,7 @@ export function LikedVideos() {
           <img className="radius-xs" src={playlistBanner}></img>
         </figure>
         <div className="pd-sm">
-          <h2>Your Likes</h2>
+          <h2>Liked Videos</h2>
           <p>{totalVideos} videos</p>
         </div>
       </article>
