@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { DropDownMenu } from "components";
-import { useUserResources, resourcesApiStateEnums, useAuth } from "contexts";
+import {
+  useUserResources,
+  resourcesDispatchConstants,
+  useAuth,
+} from "contexts";
 import { isItemInList } from "utilities";
 import { toast } from "react-toastify";
 
@@ -24,7 +28,7 @@ export function HorizontalVideoCard({
     ADD_TO_WATCHLATER,
     REMOVE_FROM_WATCH_LATER,
     REMOVE_FROM_LIKES,
-  } = resourcesApiStateEnums;
+  } = resourcesDispatchConstants;
 
   const {
     userState: { isLoggedIn },
@@ -96,7 +100,7 @@ export function HorizontalVideoCard({
           <Link to={`/video/${id}`}>{title}</Link>
         </h2>
         <h3 className="txt-sm txt-gray">{author}</h3>
-        <div class="d-flex gap-md mr-top-auto">
+        <div className="d-flex gap-md mr-top-auto">
           <DropDownMenu menuButtons={dropdownButtons} />
           {deleteButton ? (
             <button

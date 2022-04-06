@@ -1,4 +1,4 @@
-import { useUserResources, resourcesApiStateEnums } from "contexts";
+import { useUserResources, resourcesDispatchConstants } from "contexts";
 import { SinglePlaylistPage } from "components";
 
 export function History() {
@@ -7,7 +7,7 @@ export function History() {
     userResources: { history },
     userResourcesDispatch,
   } = useUserResources();
-  const { REMOVE_FROM_HISTORY, CLEAR_HISTORY } = resourcesApiStateEnums;
+  const { REMOVE_FROM_HISTORY, CLEAR_HISTORY } = resourcesDispatchConstants;
 
   const removeFromHistory = (id) =>
     userResourcesDispatch({ type: REMOVE_FROM_HISTORY, payload: id });

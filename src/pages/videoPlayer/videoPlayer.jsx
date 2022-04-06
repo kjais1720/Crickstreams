@@ -8,7 +8,7 @@ import {
   useAuth,
   useVideos,
   useUserResources,
-  resourcesApiStateEnums,
+  resourcesDispatchConstants,
 } from "contexts";
 import { LoaderForComponent } from "components";
 import { useEffect } from "react";
@@ -28,7 +28,7 @@ export function VideoPlayer() {
     REMOVE_FROM_WATCH_LATER,
     REMOVE_FROM_LIKES,
     ADD_TO_HISTORY,
-  } = resourcesApiStateEnums;
+  } = resourcesDispatchConstants;
 
   const {
     userState: { isLoggedIn },
@@ -91,7 +91,7 @@ export function VideoPlayer() {
         <YouTube opts={opts} videoId={videoId} />
         <div className="video-details flex-col gap-xs">
           <h2 className="txt-md">{title}</h2>
-          <div class="d-flex w-100 justify-c-space-between f-wrap">
+          <div className="d-flex w-100 justify-c-space-between f-wrap">
             <h3 className="txt-gray">{views} views</h3>
             <div className="d-flex gap-sm">
               <button
@@ -126,12 +126,12 @@ export function VideoPlayer() {
       </div>
       <form className="notes flex-1 pd-sm radius-xs w-50 flex-col">
         <h2>Notes</h2>
-        <div class="tr-input-wrapper">
+        <div className="tr-input-wrapper">
           <input className="tr-input-item" placeholder="Title" type="text" />
         </div>
-        <div class="tr-input-wrapper">
+        <div className="tr-input-wrapper">
           <textarea
-            class="tr-input-item"
+            className="tr-input-item"
             cols="30"
             rows="5"
             placeholder="Description"

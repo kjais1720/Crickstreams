@@ -1,5 +1,5 @@
 //Resource API state Enums
-export const resourcesApiStateEnums = {
+export const resourcesDispatchConstants = {
   GET_ALL_PLAYLISTS: "GET_ALL_PLAYLISTS",
   ADD_NEW_PLAYLIST: "ADD_NEW_PLAYLIST",
   REMOVE_PLAYLIST: "REMOVE_PLAYLIST",
@@ -28,7 +28,7 @@ const {
   REMOVE_FROM_LIKES,
   ADD_TO_WATCH_LATER,
   REMOVE_FROM_WATCH_LATER,
-} = resourcesApiStateEnums;
+} = resourcesDispatchConstants;
 
 export const apiReducer = (state, { type, payload }) => {
   switch (type) {

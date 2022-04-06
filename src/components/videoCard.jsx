@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { truncateText, isItemInList } from "utilities";
 import { DropDownMenu } from "components";
-import { useUserResources, resourcesApiStateEnums, useAuth } from "contexts";
+import {
+  useUserResources,
+  resourcesDispatchConstants,
+  useAuth,
+} from "contexts";
 import { toast } from "react-toastify";
 
 export function VideoCard({ video, setPlaylistModalState }) {
@@ -23,15 +27,15 @@ export function VideoCard({ video, setPlaylistModalState }) {
     ADD_TO_WATCH_LATER,
     REMOVE_FROM_WATCH_LATER,
     REMOVE_FROM_LIKES,
-  } = resourcesApiStateEnums;
+  } = resourcesDispatchConstants;
 
   const {
     userState: { isLoggedIn },
     setShowAuthModal,
   } = useAuth();
 
-  const isLiked = isItemInList(likedVideos,id);
-  const isAddedToWatchlater = isItemInList(watchlater,id);
+  const isLiked = isItemInList(likedVideos, id);
+  const isAddedToWatchlater = isItemInList(watchlater, id);
 
   const checkAuth = (functionToExecute) => {
     if (isLoggedIn) {

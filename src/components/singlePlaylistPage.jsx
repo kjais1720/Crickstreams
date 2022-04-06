@@ -40,7 +40,7 @@ export function SinglePlaylistPage({
       ) : (
         ""
       )}
-      <div class="d-flex gap-xs f-wrap justify-c-center">
+      <div className="d-flex gap-xs f-wrap justify-c-center">
         <article className="tr-card pd-0 radius-xs bs-lighter align-s-start bg-secondary bd-none">
           <figure>
             <img className="radius-xs" src={playlistBanner} alt="History"></img>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useUserResources, resourcesApiStateEnums } from "contexts";
+import { useUserResources, resourcesDispatchConstants } from "contexts";
 
 export function PlaylistModal({ selectedVideo, closePlaylistModal }) {
   const {
@@ -7,7 +7,7 @@ export function PlaylistModal({ selectedVideo, closePlaylistModal }) {
     userResources: { playlists },
   } = useUserResources();
   const { ADD_TO_PLAYLIST, ADD_NEW_PLAYLIST, REMOVE_FROM_PLAYLIST } =
-    resourcesApiStateEnums;
+    resourcesDispatchConstants;
   const [newPlaylistName, setNewPlaylistName] = useState("");
 
   const createPlaylist = () => {
@@ -84,7 +84,7 @@ export function PlaylistModal({ selectedVideo, closePlaylistModal }) {
 
         <div className="tr-modal-buttons flex-col gap-xs">
           <h2 className="txt-md txt-left">Create new playlist</h2>
-          <div class="d-flex gap-xs">
+          <div className="d-flex gap-xs">
             <div className="tr-input-wrapper flex-1">
               <input
                 className="tr-input-item"
