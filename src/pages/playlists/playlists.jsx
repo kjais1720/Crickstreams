@@ -27,9 +27,8 @@ export function Playlists() {
     const playlistBanner = videos[0]?.thumbnailHigh.url || "";
     const totalVideos = videos.length;
     return (
-      <Link
+      <article
         key={_id}
-        to={`/playlists/${_id}`}
         className="playlist-card tr-card pd-0 radius-xs bs-lighter align-s-start bg-secondary bd-none"
       >
         <figure>
@@ -40,7 +39,9 @@ export function Playlists() {
           ></img>
         </figure>
         <div className="pd-sm">
-          <h2>{title}</h2>
+          <h2>
+            <Link to={`/playlists/${_id}`}>{title}</Link>
+          </h2>
           <p>{totalVideos} videos</p>
         </div>
         <div class="txt-right">
@@ -51,7 +52,7 @@ export function Playlists() {
             <i className="fas fa-trash txt-error txt-lg"></i>
           </button>
         </div>
-      </Link>
+      </article>
     );
   };
 
