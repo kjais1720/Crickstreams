@@ -87,7 +87,7 @@ export function VideoCard({ video, setPlaylistModalState }) {
   ];
   return (
     <article className="tr-card bg-transparent bd-none bs-lighter flex-col align-s-stretch pd-xs">
-      <div className="tr-card-banner">
+      <Link to={`/video/${id}`} className="tr-card-banner">
         <img
           className="w-100"
           src={imgUrl}
@@ -98,7 +98,7 @@ export function VideoCard({ video, setPlaylistModalState }) {
             currentTarget.src = `/assets/fallback-image.png`;
           }}
         />
-      </div>
+      </Link>
       <div className="tr-card-body flex-col gap-xs justify-c-space-between">
         <h2 className="card-title p-rel txt-md" data-title={title}>
           <Link to={`/video/${id}`}>{truncateText(title, 30)}</Link>

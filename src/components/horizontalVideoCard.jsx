@@ -91,7 +91,10 @@ export function HorizontalVideoCard({
       className="horizontal-card d-grid bg-secondary bs-lighter radius-xs"
     >
       <figure>
-        <img className="radius-xs h-100" src={imgUrl} alt={title}></img>
+        <Link to={`/video/${id}`}>
+          <img className="radius-xs h-100" src={imgUrl} alt={title}></img>
+
+        </Link>
       </figure>
       <div className="card-body flex-col pd-xs gap-xs">
         <h2 className="card-title p-rel txt-md" data-title={title}>

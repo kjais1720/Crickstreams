@@ -121,7 +121,7 @@ export function VideoPlayer() {
           <p className="txt-gray">{description}</p>
         </div>
       </div>
-      <form className="notes flex-1 pd-sm radius-xs w-50 flex-col">
+      <form className="notes flex-1 pd-sm radius-xs w-50 flex-col" onSubmit={e=>e.preventDefault()}>
         <h2>Notes</h2>
         <div className="tr-input-wrapper">
           <input className="tr-input-item" placeholder="Title" type="text" />
