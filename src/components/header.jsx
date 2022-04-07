@@ -44,7 +44,7 @@ export function Header() {
   return (
     <header className="d-flex pd-x-lg pd-y-sm align-i-center f-wrap">
       <h2 className="logo txt-xlg txt-accent">
-        <NavLink to="/">Cricstreams</NavLink>
+        <NavLink to="/">Crickstreams</NavLink>
       </h2>
       <button
         className="hamburger mr-left-auto tr-btn tr-btn-icon hide"
