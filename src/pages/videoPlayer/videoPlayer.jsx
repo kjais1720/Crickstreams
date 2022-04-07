@@ -114,7 +114,7 @@ export function VideoPlayer() {
                 onClick={() => checkAuth(openPlaylistModal)}
               >
                 <i className={`far fa-list`}></i>
-                Add to Playlist
+                Playlist
               </button>
             </div>
           </div>

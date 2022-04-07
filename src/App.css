@@ -103,8 +103,12 @@ main{
   flex-basis: 32rem;
 }
 
+.horizontal-card{
+  grid-template-columns: 1fr 4fr;
+}
+
 /* tooltip for the card title  */
-.tr-card .title:hover::after{
+ .card-title:hover::after{
   content: attr(data-title);
   font-size: 0.7rem;
   width: fit-content;
@@ -114,6 +118,7 @@ main{
   position: absolute;
   background: var(--tr-gray);
   color: var(--tr-primary-color);
+  color: var(--tr-white);
   padding: 0 0.5rem;
   z-index: 9;
   border-radius: var(--radius-xs);
@@ -136,7 +141,7 @@ main{
   max-width: unset;
 }
 
-@media screen and (max-width: 40em) {
+@media screen and (max-width: 42em) {
   :root{
     font-size: 14px;
   }
@@ -156,7 +161,35 @@ main{
   header .nav.active{
     display: flex;
   }
+
+  .sidenav-link.active::before,
+.sidenav-link.active::after
+{
+  top: 0;
+  left: -2rem;
+  box-shadow: 1rem -1rem 0 var(--tr-accent-color);
+}
+
+.sidenav-link.active::after
+{
+  left: unset;
+  right: -2rem;
+  top: 0;
+  box-shadow: -1rem -1rem 0 var(--tr-accent-color);
+}
+
+
   .video-player-page{
+    padding: 0;
     grid-template-columns: 1fr;
   }
+
+  .video-details{
+    padding: var(--space-sm);
+  }
+
+  .horizontal-card{
+    grid-template-columns: 1.5fr 3fr;
+  }
+
 }

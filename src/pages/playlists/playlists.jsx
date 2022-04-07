@@ -44,7 +44,7 @@ export function Playlists() {
           </h2>
           <p>{totalVideos} videos</p>
         </div>
-        <div class="txt-right">
+        <div className="txt-right">
           <button
             className="bg-transparent bd-none pd-xs"
             onClick={() => removePlaylist(_id)}
@@ -61,7 +61,7 @@ export function Playlists() {
       <h1>Playlists</h1>
       <div className="w-100 mr-left-auto" style={{ maxWidth: "20rem" }}>
         <h2 className="txt-md txt-left">Create new Playlist</h2>
-        <div class="d-flex gap-xs tr-input-wrapper">
+        <div className="d-flex gap-xs tr-input-wrapper">
           <input
             type="text"
             value={newPlaylistName}

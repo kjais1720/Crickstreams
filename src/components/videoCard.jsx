@@ -100,7 +100,7 @@ export function VideoCard({ video, setPlaylistModalState }) {
         />
       </div>
       <div className="tr-card-body flex-col gap-xs justify-c-space-between">
-        <h2 className="title p-rel txt-md" data-title={title}>
+        <h2 className="card-title p-rel txt-md" data-title={title}>
           <Link to={`/video/${id}`}>{truncateText(title, 30)}</Link>
         </h2>
         <div className="d-flex justify-c-space-between align-i-center gap-sm">
