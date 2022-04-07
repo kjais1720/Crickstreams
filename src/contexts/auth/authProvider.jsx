@@ -8,8 +8,8 @@ import {
 import { authReducer } from "./reducer";
 import jwt_decode from "jwt-decode";
 import { useLocation, useNavigate } from "react-router";
-import { toast } from "react-toastify"
-import { useAxios } from "utilities"
+import { toast } from "react-toastify";
+import { useAxios, USER_TOKEN, authDispatchConstants } from "utilities";
 
 const AuthContext = createContext({ isLoggedIn: false, user: {} });
 
@@ -25,21 +25,22 @@ export function AuthProvider({ children }) {
     data: "",
   });
   const [showAuthModal, setShowAuthModal] = useState(false);
-
+  const { LOGIN } = authDispatchConstants;
   useEffect(() => {
     // To get the user details everytime the page reloads, from the saved token in localstorage
-    const encodedToken = localStorage.getItem("userToken");
+    const encodedToken = localStorage.getItem(USER_TOKEN);
     if (encodedToken) {
       const decodedToken = jwt_decode(
         encodedToken,
         process.env.REACT_APP_JWT_SECRET
       );
-      userDispatch({ type: "login", payload: decodedToken });
+      userDispatch({ type: LOGIN, payload: decodedToken });
     }
   }, []);
 
   const navigate = useNavigate();
-  const pathToRedirectAfterLogin = useLocation().state?.from?.pathname || "/";
+  const location = useLocation()
+  const pathToRedirectAfterLogin = location.state?.from?.pathname || location?.pathname || "/" ;
 
   const { serverResponse, isLoading, serverError } = useAxios(
     authApiState.url,
@@ -49,9 +50,9 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (serverResponse.status === 201 || serverResponse.status === 200) {
       const user = serverResponse.data.user;
-      localStorage.setItem("userToken",serverResponse.data.encodedToken)
+      localStorage.setItem(USER_TOKEN, serverResponse.data.encodedToken);
       userDispatch({
-        type: "login",
+        type: LOGIN,
         payload: {
           user,
         },
@@ -61,7 +62,7 @@ export function AuthProvider({ children }) {
       serverResponse.status === 200
         ? toast.success(`Logged in. Welcome back ${user.firstName}`)
         : toast.success(`Signed up. Welcome aboard ${user.firstName}`);
-      setShowAuthModal(false)
+      setShowAuthModal(false);
       navigate(pathToRedirectAfterLogin);
     }
   }, [serverResponse, serverError]);
@@ -91,7 +92,7 @@ export function AuthProvider({ children }) {
         loginSignupHandler,
         serverResponse,
         serverError,
-        isLoading
+        isLoading,
       }}
     >
       {children}

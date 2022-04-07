@@ -1,16 +1,13 @@
 import { useState } from "react";
-``;
 import { useParams } from "react-router";
 import YouTube from "react-youtube";
-import { PlaylistModal } from "components";
-
+import { PlaylistModal, LoaderForComponent } from "components";
 import {
   useAuth,
   useVideos,
   useUserResources,
-  resourcesDispatchConstants,
 } from "contexts";
-import { LoaderForComponent } from "components";
+import { resourcesDispatchConstants } from "utilities";
 import { useEffect } from "react";
 
 export function VideoPlayer() {

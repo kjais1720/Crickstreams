@@ -4,6 +4,3 @@ export {
   useUserResources,
   UserResourcesProvider,
 } from "./userResources/userResourcesProvider";
-
-//Exporting Enums
-export { resourcesDispatchConstants } from "./userResources/reducer";

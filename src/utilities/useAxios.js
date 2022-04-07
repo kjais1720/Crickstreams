@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from "react";
-import { useAuth } from "contexts";
+import { USER_TOKEN } from "utilities";
 import axios from "axios";
 
 const apiReducer = (state, { type, payload }) => {
@@ -34,8 +34,8 @@ export const useAxios = (apiUrl, method = "get", postData) => {
 
   axios.interceptors.request.use(
     (config) => {
-      const userToken = localStorage.getItem("userToken");
-      config.headers.authorization = userToken; //As a fallback if for some reason the token in localstorage is not removed ;
+      const userToken = localStorage.getItem(USER_TOKEN);
+      config.headers.authorization = userToken;
       return config;
     },
     (error) => {
@@ -44,7 +44,7 @@ export const useAxios = (apiUrl, method = "get", postData) => {
   );
 
   const getData = async () => {
-    const userToken = localStorage.getItem("userToken");
+    const userToken = localStorage.getItem(USER_TOKEN);
     try {
       apiDispatch({ type: "setLoadingTrue" });
       let res;

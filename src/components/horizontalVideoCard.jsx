@@ -2,10 +2,9 @@ import { Link } from "react-router-dom";
 import { DropDownMenu } from "components";
 import {
   useUserResources,
-  resourcesDispatchConstants,
   useAuth,
 } from "contexts";
-import { isItemInList } from "utilities";
+import { isItemInList, resourcesDispatchConstants } from "utilities";
 import { toast } from "react-toastify";
 
 export function HorizontalVideoCard({
@@ -106,6 +105,7 @@ export function HorizontalVideoCard({
             <button
               className="tr-btn tr-btn-icon"
               onClick={() => deleteButton.clickHandler(id)}
+              aria-label={deleteButton.name}
             >
               <i className="far fa-trash txt-error"></i>
             </button>

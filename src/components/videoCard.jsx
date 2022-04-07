@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { truncateText, isItemInList } from "utilities";
+import { truncateText, isItemInList, resourcesDispatchConstants } from "utilities";
 import { DropDownMenu } from "components";
 import {
   useUserResources,
-  resourcesDispatchConstants,
   useAuth,
 } from "contexts";
 import { toast } from "react-toastify";
