@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useUserResources, resourcesDispatchConstants } from "contexts";
+import { useUserResources } from "contexts";
+import {resourcesDispatchConstants} from "utilities";
 
 export function PlaylistModal({ selectedVideo, closePlaylistModal }) {
   const {

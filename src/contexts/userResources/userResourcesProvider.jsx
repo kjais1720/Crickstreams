@@ -105,7 +105,7 @@ export function UserResourcesProvider({ children }) {
   }, [isLoading, resourcesApiState.toastMessage]);
   return (
     <UserResourcesContext.Provider
-      value={{ userResources, userResourcesDispatch }}
+      value={{ userResources, userResourcesDispatch, isLoading, serverError }}
     >
       {children}
     </UserResourcesContext.Provider>

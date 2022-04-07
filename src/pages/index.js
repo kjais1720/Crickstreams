@@ -3,6 +3,7 @@ export { AuthModal } from "./auth/auth";
 export { History } from "./history/history";
 export { LikedVideos } from "./likedVideos/likedVideos";
 export { Playlists } from "./playlists/playlists";
+export { PlaylistDetails } from "./playlists/playlistDetails";
 export { VideoListing } from "./videoListing/videoListing";
 export { NotFound } from "./error/notFound";
 export { NoVideosToShow } from "./error/noVideos";

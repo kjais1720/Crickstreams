@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "contexts";
 import { toast } from "react-toastify";
+import { authDispatchConstants } from "utilities";
 
 export function Header() {
   const [showNav, setShowNav] = useState(false);
@@ -10,10 +11,11 @@ export function Header() {
     userDispatch,
     setShowAuthModal,
   } = useAuth();
+  const { LOGOUT } = authDispatchConstants;
   const hamburgerClickHandler = () => setShowNav((prev) => !prev);
   const loginClickHandler = () => setShowAuthModal(true);
   const logoutClickHandler = () => {
-    userDispatch({ type: "logout" });
+    userDispatch({ type: LOGOUT });
     toast.success("Logged out successfully!");
   };
 

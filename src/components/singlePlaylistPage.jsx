@@ -6,7 +6,7 @@ import { setDocumentTitle } from "utilities";
 export function SinglePlaylistPage({
   playlistTitle,
   playlistVideos,
-  clearHistoryBtn,
+  playlistActionBtn,
   deleteItemBtn,
 }) {
   const pageTitle = `${playlistTitle} | Crickstreams`;
@@ -28,13 +28,13 @@ export function SinglePlaylistPage({
 
   return totalVideos ? (
     <main className="flex-col pd-lg">
-      {clearHistoryBtn ? (
+      {playlistActionBtn ? (
         <div className="txt-right">
           <button
             className="tr-btn tr-btn-outline-error"
-            onClick={clearHistoryBtn.clickHandler}
+            onClick={playlistActionBtn.clickHandler}
           >
-            Clear All
+            {playlistActionBtn.name}
           </button>
         </div>
       ) : (
@@ -43,7 +43,11 @@ export function SinglePlaylistPage({
       <div className="d-flex gap-xs f-wrap justify-c-center">
         <article className="tr-card pd-0 radius-xs bs-lighter align-s-start bg-secondary bd-none">
           <figure>
-            <img className="radius-xs" src={playlistBanner} alt="History"></img>
+            <img
+              className="radius-xs"
+              src={playlistBanner}
+              alt={playlistTitle}
+            ></img>
           </figure>
           <div className="pd-sm">
             <h2>{playlistTitle}</h2>

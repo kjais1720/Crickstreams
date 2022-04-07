@@ -2,10 +2,9 @@ import { Link } from "react-router-dom";
 import { DropDownMenu } from "components";
 import {
   useUserResources,
-  resourcesDispatchConstants,
   useAuth,
 } from "contexts";
-import { isItemInList } from "utilities";
+import { truncateText, isItemInList, resourcesDispatchConstants } from "utilities";
 import { toast } from "react-toastify";
 
 export function HorizontalVideoCard({
@@ -89,15 +88,14 @@ export function HorizontalVideoCard({
   ];
   return (
     <article
-      className="d-grid bg-secondary bs-lighter radius-xs"
-      style={{ gridTemplateColumns: "1.5fr 4fr" }}
+      className="horizontal-card d-grid bg-secondary bs-lighter radius-xs"
     >
       <figure>
         <img className="radius-xs h-100" src={imgUrl} alt={title}></img>
       </figure>
       <div className="card-body flex-col pd-xs gap-xs">
-        <h2 className="txt-md">
-          <Link to={`/video/${id}`}>{title}</Link>
+        <h2 className="card-title p-rel txt-md" data-title={title}>
+          <Link to={`/video/${id}`}>{truncateText(title,50)}</Link>
         </h2>
         <h3 className="txt-sm txt-gray">{author}</h3>
         <div className="d-flex gap-md mr-top-auto">
@@ -106,6 +104,7 @@ export function HorizontalVideoCard({
             <button
               className="tr-btn tr-btn-icon"
               onClick={() => deleteButton.clickHandler(id)}
+              aria-label={deleteButton.name}
             >
               <i className="far fa-trash txt-error"></i>
             </button>
