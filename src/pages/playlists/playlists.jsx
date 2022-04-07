@@ -32,11 +32,13 @@ export function Playlists() {
         className="playlist-card tr-card pd-0 radius-xs bs-lighter align-s-start bg-secondary bd-none"
       >
         <figure>
-          <img
-            className="radius-xs h-100"
-            src={playlistBanner || "/assets/fallback-image.png"}
-            alt={title}
-          ></img>
+          <Link to={`/playlists/${_id}`}>
+            <img
+              className="radius-xs h-100"
+              src={playlistBanner || "/assets/fallback-image.png"}
+              alt={title}
+            ></img>
+          </Link>
         </figure>
         <div className="pd-sm">
           <h2>
