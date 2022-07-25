@@ -23,17 +23,19 @@ export function FormComponent({ formType, styles }) {
     password: "",
   };
   const guestCredentials = {
-    email: "adarshbalika@gmail.com",
-    password: "adarshBalika@123",
+    email: "johndoe@gmail.com",
+    password: "jhnDoe@123",
   };
 
   const [formData, setFormData] = useState(defaultFormState);
   const [formError, setFormError] = useState(defaultError);
-  const [ actionType, setActionType ] = useState("login")
+  const [actionType, setActionType] = useState("login");
 
-  const { loginSignupHandler, serverResponse, serverError, isLoading } = useAuth();
- 
-  useEffect(() => { // To handle response from the server
+  const { loginSignupHandler, serverResponse, serverError, isLoading } =
+    useAuth();
+
+  useEffect(() => {
+    // To handle response from the server
     if (serverResponse.status === 201 || serverResponse.status === 200) {
       setFormData({ ...defaultFormState });
       setFormError({ ...defaultError });
@@ -45,7 +47,6 @@ export function FormComponent({ formType, styles }) {
       setFormError((prev) => ({ ...prev, email: "Email doesn't exists" }));
     }
   }, [serverResponse, serverError]);
-
 
   useEffect(() => {
     setFormData({ ...defaultError });
@@ -62,8 +63,8 @@ export function FormComponent({ formType, styles }) {
 
   const formSubmitHandler = (e, route, data, action) => {
     e.preventDefault();
-    setActionType(action)
-    loginSignupHandler(route, data)
+    setActionType(action);
+    loginSignupHandler(route, data);
   };
 
   const disableSubmit = isFormValid(formError, formData);
@@ -104,17 +105,28 @@ export function FormComponent({ formType, styles }) {
         } tr-btn tr-btn-cta stretch-x`}
         type="submit"
         disabled={!disableSubmit}
-        onClick={(e) => formSubmitHandler(e, "/api/auth/login", formData, "login")}
+        onClick={(e) =>
+          formSubmitHandler(e, "/api/auth/login", formData, "login")
+        }
       >
-        {isLoading && actionType==="login" ? <ButtonLoader /> : "Login"}
+        {isLoading && actionType === "login" ? <ButtonLoader /> : "Login"}
       </button>
       <button
         className="tr-btn tr-btn-outline-primary stretch-x"
         onClick={(e) =>
-          formSubmitHandler(e, "/api/auth/login", guestCredentials, "guestLogin")
+          formSubmitHandler(
+            e,
+            "/api/auth/login",
+            guestCredentials,
+            "guestLogin"
+          )
         }
       >
-        {isLoading && actionType==="guestLogin" ? <ButtonLoader /> : "Guest Login"}
+        {isLoading && actionType === "guestLogin" ? (
+          <ButtonLoader />
+        ) : (
+          "Guest Login"
+        )}
       </button>
     </form>
   ) : (
@@ -151,9 +163,11 @@ export function FormComponent({ formType, styles }) {
         } tr-btn tr-btn-cta stretch-x`}
         type="submit"
         disabled={!disableSubmit}
-        onClick={(e) => formSubmitHandler(e, "/api/auth/signup", formData, "signup")}
+        onClick={(e) =>
+          formSubmitHandler(e, "/api/auth/signup", formData, "signup")
+        }
       >
-        {isLoading && actionType==="signup" ? <ButtonLoader /> : "Signup"}
+        {isLoading && actionType === "signup" ? <ButtonLoader /> : "Signup"}
       </button>
     </form>
   );

@@ -86,7 +86,7 @@ export function VideoCard({ video, setPlaylistModalState }) {
     },
   ];
   return (
-    <article className="tr-card bg-transparent bd-none bs-lighter flex-col align-s-stretch pd-xs">
+    <article className="tr-card bg-transparent bd-none bs-lighter flex-col align-s-stretch pd-xs max-w-unset">
       <Link to={`/video/${id}`} className="tr-card-banner">
         <img
           className="w-100"

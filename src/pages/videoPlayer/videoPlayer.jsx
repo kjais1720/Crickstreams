@@ -1,17 +1,14 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useParams } from "react-router";
 import YouTube from "react-youtube";
 import { PlaylistModal, LoaderForComponent } from "components";
-import {
-  useAuth,
-  useVideos,
-  useUserResources,
-} from "contexts";
+import { useAuth, useVideos, useUserResources } from "contexts";
 import { resourcesDispatchConstants } from "utilities";
 import { useEffect } from "react";
+import { VideoList } from "components/videoList";
 
 export function VideoPlayer() {
-  const { id } = useParams();
+  const { id: currentVideoId } = useParams();
   const { videos, isLoading } = useVideos();
   const [currentVideo, setCurrentVideo] = useState({});
   const [showPlaylistModal, setShowPlaylistModal] = useState(false);
@@ -33,15 +30,15 @@ export function VideoPlayer() {
   } = useAuth();
 
   useEffect(() => {
-    const foundVideo = videos.find((video) => video._id === id);
+    const foundVideo = videos.find((video) => video._id === currentVideoId);
     if (foundVideo) {
       setCurrentVideo({ ...foundVideo });
       userResourcesDispatch({ type: ADD_TO_HISTORY, payload: foundVideo });
     }
   }, [videos, isLoading]);
 
-  const isLiked = likedVideos.some((video) => video._id === id);
-  const isAddedToWatchlater = watchlater.some((video) => video._id === id);
+  const isLiked = likedVideos.some((video) => video._id === currentVideoId);
+  const isAddedToWatchlater = watchlater.some((video) => video._id === currentVideoId);
 
   const checkAuth = (functionToExecute) => {
     if (isLoggedIn) {
@@ -69,8 +66,13 @@ export function VideoPlayer() {
 
   const closePlaylistModal = () => setShowPlaylistModal(false);
 
-  const { title, description, thumbnailHigh, author, likes, views, videoId } =
-    currentVideo;
+  const {
+    title,
+    description,
+    views,
+    videoId,
+    category: currentVideoCategory,
+  } = currentVideo;
 
   const opts = {
     height: "390",
@@ -79,6 +81,14 @@ export function VideoPlayer() {
       autoplay: 0,
     },
   };
+  const relatedVideos = useMemo(
+    () =>
+      videos.filter(
+        ({ _id, category }) =>
+          category === currentVideoCategory && _id !== currentVideoId
+      ),
+    [currentVideo]
+  );
 
   return isLoading ? (
     <LoaderForComponent />
@@ -121,21 +131,10 @@ export function VideoPlayer() {
           <p className="txt-gray">{description}</p>
         </div>
       </div>
-      <form className="notes flex-1 pd-sm radius-xs w-50 flex-col" onSubmit={e=>e.preventDefault()}>
-        <h2>Notes</h2>
-        <div className="tr-input-wrapper">
-          <input className="tr-input-item" placeholder="Title" type="text" />
-        </div>
-        <div className="tr-input-wrapper">
-          <textarea
-            className="tr-input-item"
-            cols="30"
-            rows="5"
-            placeholder="Description"
-          ></textarea>
-        </div>
-        <button className="tr-btn tr-btn-cta"> Add note</button>
-      </form>
+      <div className="pd-x-sm" style={{maxHeight:"100vh", overflowY:"auto"}}>
+        <h2 className="txt-center">Related Videos</h2>
+        <VideoList videos={relatedVideos} />
+      </div>
       {showPlaylistModal ? (
         <PlaylistModal
           selectedVideo={currentVideo}

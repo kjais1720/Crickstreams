@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router";
 import {
   History,
   LikedVideos,
-  VideoListing,
+  Explore,
   Playlists,
   PlaylistDetails,
   NotFound,
@@ -13,7 +13,7 @@ import {
 import { AuthMiddleware } from "authMiddleware";
 import { VideosProvider, UserResourcesProvider } from "contexts";
 
-export function AppPages({ categories }) {
+export function WithSidebar({ categories }) {
   return (
     <div className="w-100 d-flex">
       <SideNav />
@@ -23,21 +23,21 @@ export function AppPages({ categories }) {
             <Routes>
               <Route
                 path="/explore"
-                element={<VideoListing categories={categories} />}
+                element={<Explore categories={categories} />}
               />
               <Route
                 path="/explore/:category"
-                element={<VideoListing categories={categories} />}
+                element={<Explore categories={categories} />}
               />
-              <Route
-                path="/video/:id"
-                element={<VideoPlayer/>}
-              />
+              <Route path="/video/:id" element={<VideoPlayer />} />
               <Route element={<AuthMiddleware />}>
                 <Route path="/liked-videos" element={<LikedVideos />} />
                 <Route path="/history" element={<History />} />
                 <Route path="/playlists" element={<Playlists />} />
-                <Route path="/playlists/:playlistId" element={<PlaylistDetails />} />
+                <Route
+                  path="/playlists/:playlistId"
+                  element={<PlaylistDetails />}
+                />
                 <Route path="/watch-later" element={<WatchLater />} />
               </Route>
               <Route path="*" element={<NotFound />} />
