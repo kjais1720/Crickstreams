@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAxios } from "utilities";
 import {
   Home,
-  AppPages
+  WithSidebar
 } from "pages";
 
 export function AllRoutes() {
@@ -14,7 +14,7 @@ export function AllRoutes() {
   return (
       <Routes>
         <Route path="/" element={<Home categories={categories} />} />
-        <Route path="/*" element={<AppPages categories={categories} />} />
+        <Route path="/*" element={<WithSidebar categories={categories} />} />
       </Routes>
   );
 }

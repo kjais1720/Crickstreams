@@ -1,18 +1,11 @@
 import { useVideos } from "contexts";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { VideoCard, PlaylistModal } from "components";
+import { VideoList } from "components";
 import { setDocumentTitle } from "utilities";
-import { useState } from "react";
 
-export function VideoListing({ categories }) {
+export function Explore({ categories }) {
   const { category } = useParams();
   const navigate = useNavigate();
-  const [playlistModalState, setPlaylistModalState] = useState({
-    show: false,
-    selectedVideo: {},
-  });
-  const closePlaylistModal = () =>
-    setPlaylistModalState({ show: false, selectedVideo: {} });
   //To check whether the category found from the url is a valid category or not
   // Also, initially the "categories array would be empty until a response is recieved from the server"
   // So if the user is on a valid category page and tries to reload the page, the categories array would be empty and the statement would be false
@@ -58,23 +51,7 @@ export function VideoListing({ categories }) {
       <div className="d-flex gap-sm mr-y-lg f-wrap">
         {categories.map(createLinkChip)}
       </div>
-      <div className="d-grid grid-autofit-md justify-i-center gap-sm">
-        {filteredVideos.map((video) => (
-          <VideoCard
-            key={video._id}
-            video={video}
-            setPlaylistModalState={setPlaylistModalState}
-          />
-        ))}
-      </div>
-      {playlistModalState.show ? (
-        <PlaylistModal
-          selectedVideo={playlistModalState.selectedVideo}
-          closePlaylistModal={closePlaylistModal}
-        />
-      ) : (
-        ""
-      )}
+      <VideoList videos={filteredVideos} />
     </main>
   );
 }

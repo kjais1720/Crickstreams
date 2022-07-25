@@ -44,22 +44,14 @@ export const useAxios = (apiUrl, method = "get", postData) => {
   );
 
   const getData = async () => {
-    const userToken = localStorage.getItem(USER_TOKEN);
     try {
       apiDispatch({ type: "setLoadingTrue" });
       let res;
-      switch (method) {
-        case "get":
-          res = await axios.get(apiUrl);
-          break;
-        case "post":
-          res = await axios.post(apiUrl, postData);
-          break;
-        case "delete":
-          res = await axios.delete(apiUrl);
-        default:
-          break;
-      }
+      res = await axios({
+        url:apiUrl,
+        method:method,
+        data:postData
+      })
       apiDispatch({ type: "setData", payload: res });
     } catch (err) {
       apiDispatch({ type: "setError", payload: err });

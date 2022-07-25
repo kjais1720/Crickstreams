@@ -1,8 +1,9 @@
 .navigation{
   position: sticky;
-  top: 6rem;
+  top: 0;
   width: 4.7rem;
   min-height: 100vh;
+  align-self: self-start;
   background: var(--tr-primary-color);
   border-right: 5px solid var(--tr-accent-color);
   overflow-x: hidden;

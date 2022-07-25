@@ -51,6 +51,10 @@ body{
   grid-template-columns: repeat(auto-fit, minmax(15rem,1fr));
 }
 
+.max-w-unset{
+  max-width: unset;
+}
+
 header{
   position: relative;
   width: 100%;
